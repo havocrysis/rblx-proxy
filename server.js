@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
-
 app.use(express.json());
-
 app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -10,7 +8,6 @@ app.use(function(req, res, next) {
   if (req.method === "OPTIONS") { res.sendStatus(200); return; }
   next();
 });
-
 app.get("/catalog", async function(req, res) {
   try {
     var q = new URLSearchParams(req.query).toString();
@@ -21,7 +18,6 @@ app.get("/catalog", async function(req, res) {
     res.status(500).json({ error: e.message });
   }
 });
-
 app.post("/details", async function(req, res) {
   try {
     var r = await fetch("https://catalog.roblox.com/v1/catalog/items/details", {
@@ -35,10 +31,22 @@ app.post("/details", async function(req, res) {
     res.status(500).json({ error: e.message });
   }
 });
-
+app.get("/testdetails", async function(req, res) {
+  try {
+    var payload = {items:[{itemType:"Asset",id:6984763785}]};
+    var r = await fetch("https://catalog.roblox.com/v1/catalog/items/details", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    var data = await r.json();
+    res.json({ status: r.status, data: data });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 app.get("/", function(req, res) {
   res.json({ status: "running" });
 });
-
 var PORT = process.env.PORT || 3000;
 app.listen(PORT);
