@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBLX Trend Scanner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap');
+
+:root {
+–red: #ff3131;
+–black: #0a0a0a;
+–white: #f0f0f0;
+–gray: #1a1a1a;
+–mid: #2a2a2a;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–black);
+color: var(–white);
+font-family: ‘Space Mono’, monospace;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+pointer-events: none;
+z-index: 999;
+}
+
+header {
+padding: 28px 32px 16px;
+border-bottom: 2px solid var(–red);
+display: flex;
+align-items: flex-end;
+gap: 20px;
+flex-wrap: wrap;
+}
+
+header h1 {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(32px, 6vw, 64px);
+letter-spacing: 6px;
+line-height: 1;
+}
+
+header h1 span { color: var(–red); }
+
+.tag {
+font-size: 10px;
+letter-spacing: 3px;
+color: var(–red);
+border: 1px solid var(–red);
+padding: 3px 7px;
+text-transform: uppercase;
+margin-bottom: 5px;
+animation: blink 1.4s step-end infinite;
+display: inline-block;
+}
+
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+/* Proxy setup banner */
+.proxy-bar {
+background: #111;
+border-bottom: 1px solid var(–mid);
+padding: 12px 32px;
+display: flex;
+align-items: center;
+gap: 12px;
+flex-wrap: wrap;
+}
+
+.proxy-bar label {
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: #666;
+white-space: nowrap;
+}
+
+.proxy-bar input {
+flex: 1;
+min-width: 200px;
+background: var(–black);
+border: 1px solid var(–mid);
+color: var(–white);
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+padding: 8px 12px;
+letter-spacing: 1px;
+outline: none;
+transition: border-color 0.2s;
+}
+
+.proxy-bar input:focus { border-color: var(–red); }
+.proxy-bar input::placeholder { color: #444; }
+
+.proxy-status {
+font-size: 10px;
+letter-spacing: 2px;
+padding: 6px 12px;
+border: 1px solid;
+white-space: nowrap;
+}
+
+.proxy-status.none { color: #555; border-color: #333; }
+.proxy-status.ok   { color: #3a3; border-color: #3a3; }
+.proxy-status.err  { color: var(–red); border-color: var(–red); }
+
+.test-btn {
+background: transparent;
+border: 1px solid var(–mid);
+color: #888;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+letter-spacing: 2px;
+padding: 8px 14px;
+cursor: pointer;
+text-transform: uppercase;
+transition: all 0.15s;
+white-space: nowrap;
+}
+
+.test-btn:hover { border-color: var(–white); color: var(–white); }
+
+.controls {
+padding: 20px 32px;
+display: flex;
+gap: 12px;
+align-items: center;
+flex-wrap: wrap;
+border-bottom: 1px solid var(–mid);
+}
+
+.btn-group { display: flex; border: 1px solid var(–mid); }
+
+.btn-group button {
+background: transparent;
+color: var(–white);
+border: none;
+padding: 8px 16px;
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+letter-spacing: 2px;
+cursor: pointer;
+text-transform: uppercase;
+transition: all 0.15s;
+border-right: 1px solid var(–mid);
+}
+
+.btn-group button:last-child { border-right: none; }
+.btn-group button.active, .btn-group button:hover { background: var(–red); }
+
+.cat-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.cat-btn {
+background: transparent;
+color: var(–white);
+border: 1px solid var(–mid);
+padding: 8px 14px;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+letter-spacing: 1px;
+cursor: pointer;
+text-transform: uppercase;
+transition: all 0.15s;
+}
+
+.cat-btn.active { border-color: var(–red); color: var(–red); }
+
+.scan-btn {
+margin-left: auto;
+background: var(–red);
+color: var(–white);
+border: none;
+padding: 10px 22px;
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+letter-spacing: 3px;
+cursor: pointer;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 8px;
+transition: opacity 0.2s;
+}
+
+.scan-btn:hover { opacity: 0.85; }
+.scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.dot {
+width: 8px; height: 8px;
+background: white;
+border-radius: 50%;
+flex-shrink: 0;
+}
+
+.scan-btn.scanning .dot { animation: pulse 0.6s ease-in-out infinite alternate; }
+@keyframes pulse { from{transform:scale(1);opacity:1} to{transform:scale(1.6);opacity:0.4} }
+
+main {
+padding: 28px 32px;
+display: grid;
+grid-template-columns: 1fr 300px;
+gap: 28px;
+}
+
+.panel { background: var(–gray); border: 1px solid var(–mid); }
+
+.panel-header {
+padding: 11px 18px;
+border-bottom: 1px solid var(–mid);
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: #666;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.panel-header .count { color: var(–red); font-size: 11px; }
+
+.view-tabs { display: flex; border-bottom: 1px solid var(–mid); }
+
+.view-tab {
+padding: 9px 18px;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+cursor: pointer;
+border-right: 1px solid var(–mid);
+background: transparent;
+color: #555;
+border-top: none; border-left: none; border-bottom: none;
+font-family: ‘Space Mono’, monospace;
+transition: all 0.15s;
+}
+
+.view-tab.active { color: var(–white); background: var(–mid); }
+
+.keyword-grid {
+padding: 20px;
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+min-height: 260px;
+align-content: flex-start;
+}
+
+.kw-chip {
+display: flex;
+align-items: center;
+gap: 8px;
+background: var(–black);
+border: 1px solid var(–mid);
+padding: 7px 12px;
+cursor: default;
+transition: border-color 0.15s;
+position: relative;
+overflow: hidden;
+}
+
+.kw-chip::before {
+content: ‘’;
+position: absolute;
+left: 0; top: 0; bottom: 0;
+background: var(–red);
+opacity: 0.12;
+}
+
+.kw-chip .word {
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+position: relative;
+}
+
+.kw-chip .freq { font-size: 10px; color: var(–red); position: relative; }
+
+.kw-chip.rank-1 { border-color: #ffd700; }
+.kw-chip.rank-1 .word { color: #ffd700; }
+.kw-chip.rank-2 { border-color: #c0c0c0; }
+.kw-chip.rank-2 .word { color: #c0c0c0; }
+.kw-chip.rank-3 { border-color: #cd7f32; }
+.kw-chip.rank-3 .word { color: #cd7f32; }
+
+.bar-chart { padding: 18px 22px; display: flex; flex-direction: column; gap: 10px; }
+
+.bar-row {
+display: grid;
+grid-template-columns: 90px 1fr 36px;
+align-items: center;
+gap: 10px;
+}
+
+.bar-label {
+font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.bar-track { background: var(–black); height: 13px; border: 1px solid var(–mid); }
+.bar-fill { height: 100%; background: var(–red); transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+.bar-val { font-size: 10px; color: var(–red); letter-spacing: 1px; }
+
+.log-panel {
+padding: 14px 18px;
+border-top: 1px solid var(–mid);
+font-size: 10px;
+color: #444;
+letter-spacing: 1px;
+line-height: 2;
+min-height: 70px;
+}
+
+.log-entry.active { color: #888; }
+.log-entry.done { color: #3a3; }
+.log-entry.err { color: #c44; }
+
+.item-list { overflow-y: auto; max-height: 460px; }
+
+.item-entry {
+padding: 11px 18px;
+border-bottom: 1px solid var(–mid);
+transition: background 0.15s;
+}
+
+.item-entry:hover { background: var(–mid); }
+.item-entry:last-child { border-bottom: none; }
+.item-entry .item-name { font-size: 10px; letter-spacing: 0.5px; margin-bottom: 4px; line-height: 1.4; }
+
+.item-entry .item-meta {
+display: flex; gap: 10px;
+font-size: 9px; color: #555; letter-spacing: 1px;
+}
+
+.keyword-badge {
+display: inline-block;
+font-size: 9px;
+background: rgba(255,49,49,0.12);
+color: var(–red);
+border: 1px solid rgba(255,49,49,0.3);
+padding: 2px 6px;
+margin-top: 4px;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+.empty-state {
+width: 100%; padding: 50px 20px;
+text-align: center; color: #333;
+}
+
+.empty-state .icon { font-size: 40px; display: block; margin-bottom: 12px; }
+.empty-state p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; }
+
+@media (max-width: 700px) {
+main { grid-template-columns: 1fr; }
+header, .controls, .proxy-bar { padding-left: 20px; padding-right: 20px; }
+main { padding: 20px; }
+.scan-btn { margin-left: 0; width: 100%; justify-content: center; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="tag">● Live Scanner</div>
+    <h1>RBLX <span>TREND</span> SCANNER</h1>
+  </div>
+  <div style="margin-bottom:6px; font-size:10px; color:#333; letter-spacing:2px;">2D CLOTHING KEYWORD ANALYZER</div>
+</header>
+
+<!-- Proxy URL input -->
+
+<div class="proxy-bar">
+  <label>Proxy URL</label>
+  <input type="text" id="proxyUrl" placeholder="https://your-app.onrender.com" spellcheck="false" autocomplete="off" />
+  <button class="test-btn" id="testBtn">Test Connection</button>
+  <div class="proxy-status none" id="proxyStatus">NOT SET</div>
+</div>
+
+<div class="controls">
+  <div style="font-size:10px;letter-spacing:2px;color:#555;text-transform:uppercase;margin-right:4px;">Period</div>
+  <div class="btn-group">
+    <button class="active" data-period="daily">Daily</button>
+    <button data-period="weekly">Weekly</button>
+    <button data-period="monthly">Monthly</button>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;color:#555;text-transform:uppercase;margin-left:10px;margin-right:4px;">Category</div>
+  <div class="cat-group">
+    <button class="cat-btn active" data-cat="11">Shirts</button>
+    <button class="cat-btn" data-cat="12">Pants</button>
+    <button class="cat-btn" data-cat="2">T-Shirts</button>
+  </div>
+
+  <button class="scan-btn" id="scanBtn">
+    <span class="dot"></span>
+    SCAN TRENDS
+  </button>
+</div>
+
+<main>
+  <div>
+    <div class="panel" style="margin-bottom:24px;">
+      <div class="panel-header">
+        <span>Top Trending Keywords</span>
+        <span class="count" id="kwCount">—</span>
+      </div>
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="chips">Cloud</button>
+        <button class="view-tab" data-view="bars">Chart</button>
+      </div>
+      <div id="keywordDisplay">
+        <div class="keyword-grid">
+          <div class="empty-state">
+            <span class="icon">📡</span>
+            <p>Enter your proxy URL above,<br>then press SCAN TRENDS</p>
+          </div>
+        </div>
+      </div>
+      <div class="log-panel" id="logPanel">
+        <div class="log-entry">// awaiting proxy URL...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span>Scanned Items</span>
+      <span class="count" id="itemCount">—</span>
+    </div>
+    <div class="item-list" id="itemList">
+      <div style="padding:40px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div>
+    </div>
+  </div>
+</main>
+
+<script>
+const STOPWORDS = new Set([
+  'the','a','an','and','or','of','in','on','at','to','for','with','by',
+  'from','is','it','its','this','that','these','those','my','your','our',
+  'their','be','been','has','have','had','do','does','did','will','would',
+  'could','should','may','might','can','not','no','nor','so','yet','both',
+  'but','if','as','up','out','about','than','more','into','through',
+  'new','old','big','small','cool','nice','cute','best','good','great',
+  'shirt','tshirt','pants','top','bottom','clothing','outfit','wear',
+  'roblox','rblx','classic','style','pack','set','item','edition','limited',
+  'ugc','free','sale','store','shop','buy','get','ver','version',
+  'i','me','we','you','he','she','they','who','what','when','where','how',
+]);
+
+const CATEGORY_MAP = {
+  '11': { name: 'Shirts', subcategoryId: 12 },
+  '12': { name: 'Pants', subcategoryId: 13 },
+  '2':  { name: 'T-Shirts', subcategoryId: 2 },
+};
+
+let currentPeriod = 'daily';
+let currentCat = '11';
+let currentView = 'chips';
+let scannedItems = [];
+let keywordFreq = {};
+let isScanning = false;
+
+const scanBtn    = document.getElementById('scanBtn');
+const logPanel   = document.getElementById('logPanel');
+const itemList   = document.getElementById('itemList');
+const keywordDisplay = document.getElementById('keywordDisplay');
+const kwCount    = document.getElementById('kwCount');
+const itemCount  = document.getElementById('itemCount');
+const proxyInput = document.getElementById('proxyUrl');
+const proxyStatus = document.getElementById('proxyStatus');
+const testBtn    = document.getElementById('testBtn');
+
+// Persist proxy URL
+const saved = localStorage.getItem('rblx_proxy');
+if (saved) proxyInput.value = saved;
+
+proxyInput.addEventListener('input', () => {
+  localStorage.setItem('rblx_proxy', proxyInput.value.trim());
+  proxyStatus.className = 'proxy-status none';
+  proxyStatus.textContent = 'NOT TESTED';
+});
+
+function getProxy() {
+  return proxyInput.value.trim().replace(/\/$/, '');
+}
+
+// Test connection
+testBtn.addEventListener('click', async () => {
+  const base = getProxy();
+  if (!base) { alert('Enter your proxy URL first.'); return; }
+  testBtn.textContent = 'Testing...';
+  testBtn.disabled = true;
+  try {
+    const r = await fetch(`${base}/`);
+    const d = await r.json();
+    proxyStatus.className = 'proxy-status ok';
+    proxyStatus.textContent = '✓ CONNECTED';
+  } catch(e) {
+    proxyStatus.className = 'proxy-status err';
+    proxyStatus.textContent = '✗ FAILED';
+  }
+  testBtn.textContent = 'Test Connection';
+  testBtn.disabled = false;
+});
+
+// Period buttons
+document.querySelectorAll('.btn-group button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.btn-group button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPeriod = btn.dataset.period;
+  });
+});
+
+// Category buttons
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+  });
+});
+
+// View tabs
+document.querySelectorAll('.view-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentView = tab.dataset.view;
+    renderKeywords();
+  });
+});
+
+function log(msg, type = 'active') {
+  const entries = logPanel.querySelectorAll('.log-entry');
+  entries.forEach(e => e.classList.remove('active'));
+  const div = document.createElement('div');
+  div.className = `log-entry ${type}`;
+  div.textContent = `> ${msg}`;
+  logPanel.appendChild(div);
+  if (logPanel.children.length > 6) logPanel.removeChild(logPanel.firstChild);
+}
+
+function extractKeyword(name) {
+  const words = name.toLowerCase()
+    .replace(/[^a-z\s]/g, ' ')
+    .split(/\s+/)
+    .map(w => w.trim())
+    .filter(w => w.length > 2 && !STOPWORDS.has(w));
+  if (!words.length) return null;
+  const scored = words.map(w => ({ word: w, score: w.length + (w.length > 5 ? 2 : 0) }));
+  scored.sort((a, b) => b.score - a.score);
+  return scored[0].word;
+}
+
+async function fetchCatalogPage(cursor = '') {
+  const base = getProxy();
+  const cat = CATEGORY_MAP[currentCat];
+  const sortType = currentPeriod === 'daily' ? 3 : currentPeriod === 'weekly' ? 4 : 5;
+  const params = new URLSearchParams({
+    category: 'Clothing',
+    subcategory: cat.subcategoryId,
+    sortType,
+    sortAggregation: 1,
+    limit: 30,
+    ...(cursor ? { cursor } : {})
+  });
+  const r = await fetch(`${base}/catalog?${params}`);
+  if (!r.ok) throw new Error(`Catalog fetch failed: ${r.status}`);
+  return await r.json();
+}
+
+async function fetchDetails(ids) {
+  if (!ids.length) return [];
+  const base = getProxy();
+  const r = await fetch(`${base}/details`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items: ids.map(id => ({ itemType: 'Asset', id })) })
+  });
+  if (!r.ok) return [];
+  const d = await r.json();
+  return d.data || [];
+}
+
+async function runScan() {
+  if (isScanning) return;
+  const base = getProxy();
+  if (!base) { alert('Please enter your proxy URL at the top first!'); return; }
+
+  isScanning = true;
+  scanBtn.disabled = true;
+  scanBtn.classList.add('scanning');
+  scannedItems = [];
+  keywordFreq = {};
+  logPanel.innerHTML = '';
+
+  const catName = CATEGORY_MAP[currentCat].name;
+  log(`Starting scan: ${catName} / ${currentPeriod}`);
+  renderItems(); renderKeywords();
+
+  try {
+    log('Connecting to proxy...');
+    const page1 = await fetchCatalogPage();
+    const ids1 = (page1.data || []).map(i => i.id);
+    log(`Got ${ids1.length} IDs — fetching details...`);
+
+    const details1 = await fetchDetails(ids1);
+    processItems(details1);
+
+    if (page1.nextPageCursor) {
+      try {
+        log('Fetching page 2...');
+        const page2 = await fetchCatalogPage(page1.nextPageCursor);
+        const ids2 = (page2.data || []).map(i => i.id);
+        const details2 = await fetchDetails(ids2);
+        processItems(details2);
+      } catch(e) { /* page 2 optional */ }
+    }
+
+    log(`Done! ${scannedItems.length} items, ${Object.keys(keywordFreq).length} keywords.`, 'done');
+    proxyStatus.className = 'proxy-status ok';
+    proxyStatus.textContent = '✓ LIVE DATA';
+
+  } catch(err) {
+    log(`Error: ${err.message}`, 'err');
+    log('Check your proxy URL and try again.', 'err');
+    proxyStatus.className = 'proxy-status err';
+    proxyStatus.textContent = '✗ ERROR';
+  }
+
+  renderItems();
+  renderKeywords();
+  itemCount.textContent = `${scannedItems.length} items`;
+  kwCount.textContent = `${Object.keys(keywordFreq).length} keywords`;
+  isScanning = false;
+  scanBtn.disabled = false;
+  scanBtn.classList.remove('scanning');
+}
+
+function processItems(details) {
+  for (const item of details) {
+    const kw = extractKeyword(item.name || '');
+    if (!kw) continue;
+    scannedItems.push({
+      name: item.name,
+      keyword: kw,
+      favorites: item.favoriteCount || 0,
+      sales: item.sales || 0,
+      price: item.price || 0,
+    });
+    keywordFreq[kw] = (keywordFreq[kw] || 0) + 1;
+  }
+}
+
+function renderKeywords() {
+  const sorted = Object.entries(keywordFreq).sort((a,b) => b[1]-a[1]).slice(0,20);
+  const max = sorted[0]?.[1] || 1;
+
+  if (!sorted.length) {
+    keywordDisplay.innerHTML = `<div class="keyword-grid"><div class="empty-state"><span class="icon">📡</span><p>Enter proxy URL above,<br>then press SCAN TRENDS</p></div></div>`;
+    return;
+  }
+
+  if (currentView === 'chips') {
+    keywordDisplay.innerHTML = `<div class="keyword-grid">${
+      sorted.map(([word, count], i) => {
+        const pct = (count/max*100).toFixed(0);
+        const rc = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'';
+        return `<div class="kw-chip ${rc}" style="--p:${pct}%">
+          <style>.kw-chip[style="--p:${pct}%"]::before{width:${pct}%}</style>
+
+```
+      <span class="word">${word}</span>
+      <span class="freq">×${count}</span>
+    </div>`;
+  }).join('')
+}</div>`;
+```
+
+} else {
+keywordDisplay.innerHTML = `<div class="bar-chart">${ sorted.slice(0,12).map(([word,count]) => { const pct = (count/max*100).toFixed(1); return `<div class="bar-row">
+<div class="bar-label">${word}</div>
+<div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+<div class="bar-val">×${count}</div>
+</div>`; }).join('') }</div>`;
+}
+}
+
+function renderItems() {
+if (!scannedItems.length) {
+itemList.innerHTML = `<div style="padding:40px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div>`;
+return;
+}
+itemList.innerHTML = scannedItems.slice(0,40).map(item => ` <div class="item-entry"> <div class="item-name">${item.name}</div> <div class="item-meta"> <span>❤ ${(item.favorites||0).toLocaleString()}</span> <span>💰 ${item.price ? item.price+'R$' : 'FREE'}</span> </div> <span class="keyword-badge">${item.keyword}</span> </div>`).join(’’);
+}
+
+scanBtn.addEventListener(‘click’, runScan);
+</script>
+
+</body>
+</html>
