@@ -10,64 +10,64 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--black); color: var(--white); font-family: 'Space Mono', monospace; min-height: 100vh; }
   header { padding: 28px 24px 16px; border-bottom: 2px solid var(--red); }
-  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 6px; line-height: 1; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 6px; line-height: 1; }
   header h1 span { color: var(--red); }
-  .tag { font-size: 10px; letter-spacing: 3px; color: var(--red); border: 1px solid var(--red); padding: 3px 7px; text-transform: uppercase; margin-bottom: 5px; display: inline-block; animation: blink 1.4s step-end infinite; }
+  .tag { font-size: 11px; letter-spacing: 3px; color: var(--red); border: 1px solid var(--red); padding: 3px 7px; text-transform: uppercase; margin-bottom: 5px; display: inline-block; animation: blink 1.4s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
   .proxy-bar { background: #111; border-bottom: 1px solid var(--mid); padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
-  .proxy-dot { width: 8px; height: 8px; background: #3a3; border-radius: 50%; animation: blink 1.4s step-end infinite; }
-  .proxy-label { font-size: 10px; letter-spacing: 2px; color: #3a3; text-transform: uppercase; }
-  .proxy-url { font-size: 9px; color: #444; margin-left: auto; }
-  .controls { padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--mid); }
-  .control-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .control-label { font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; width: 70px; flex-shrink: 0; }
+  .proxy-dot { width: 9px; height: 9px; background: #3a3; border-radius: 50%; animation: blink 1.4s step-end infinite; }
+  .proxy-label { font-size: 11px; letter-spacing: 2px; color: #3a3; text-transform: uppercase; }
+  .proxy-url { font-size: 10px; color: #444; margin-left: auto; }
+  .controls { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; border-bottom: 1px solid var(--mid); }
+  .control-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .control-label { font-size: 11px; letter-spacing: 2px; color: #555; text-transform: uppercase; width: 70px; flex-shrink: 0; }
   .btn-group { display: flex; border: 1px solid var(--mid); }
-  .btn-group button { background: transparent; color: var(--white); border: none; padding: 8px 14px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; border-right: 1px solid var(--mid); }
+  .btn-group button { background: transparent; color: var(--white); border: none; padding: 10px 18px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; border-right: 1px solid var(--mid); }
   .btn-group button:last-child { border-right: none; }
   .btn-group button.active, .btn-group button:hover { background: var(--red); }
   .cat-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .cat-btn { background: transparent; color: var(--white); border: 1px solid var(--mid); padding: 7px 12px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
+  .cat-btn { background: transparent; color: var(--white); border: 1px solid var(--mid); padding: 9px 14px; font-family: 'Space Mono', monospace; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
   .cat-btn.active { border-color: var(--red); color: var(--red); }
-  .scan-btn { width: 100%; background: var(--red); color: var(--white); border: none; padding: 14px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
+  .scan-btn { width: 100%; background: var(--red); color: var(--white); border: none; padding: 16px; font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
   .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .dot { width: 8px; height: 8px; background: white; border-radius: 50%; }
+  .dot { width: 9px; height: 9px; background: white; border-radius: 50%; }
   .scan-btn.scanning .dot { animation: pulse 0.6s ease-in-out infinite alternate; }
   @keyframes pulse { from{transform:scale(1)}to{transform:scale(1.8);opacity:0.3} }
   .panel { background: var(--gray); border: 1px solid var(--mid); margin: 20px 24px; }
-  .panel-header { padding: 11px 18px; border-bottom: 1px solid var(--mid); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; }
-  .panel-header .count { color: var(--red); }
+  .panel-header { padding: 13px 20px; border-bottom: 1px solid var(--mid); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; }
+  .panel-header .count { color: var(--red); font-size: 12px; }
   .view-tabs { display: flex; border-bottom: 1px solid var(--mid); }
-  .view-tab { padding: 9px 18px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-right: 1px solid var(--mid); background: transparent; color: #555; border-top:none;border-left:none;border-bottom:none; font-family: 'Space Mono', monospace; }
+  .view-tab { padding: 10px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-right: 1px solid var(--mid); background: transparent; color: #555; border-top:none;border-left:none;border-bottom:none; font-family: 'Space Mono', monospace; }
   .view-tab.active { color: var(--white); background: var(--mid); }
-  .keyword-grid { padding: 16px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 180px; align-content: flex-start; }
-  .kw-chip { display: flex; align-items: center; gap: 8px; background: var(--black); border: 1px solid var(--mid); padding: 6px 10px; position: relative; overflow: hidden; }
+  .keyword-grid { padding: 18px; display: flex; flex-wrap: wrap; gap: 10px; min-height: 180px; align-content: flex-start; }
+  .kw-chip { display: flex; align-items: center; gap: 8px; background: var(--black); border: 1px solid var(--mid); padding: 8px 12px; position: relative; overflow: hidden; }
   .kw-chip .bar { position: absolute; left:0;top:0;bottom:0; background: var(--red); opacity: 0.12; }
-  .kw-chip .word { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; position: relative; }
-  .kw-chip .freq { font-size: 9px; color: var(--red); position: relative; }
+  .kw-chip .word { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; position: relative; }
+  .kw-chip .freq { font-size: 10px; color: var(--red); position: relative; }
   .kw-chip.r1 { border-color: #ffd700; } .kw-chip.r1 .word { color: #ffd700; }
   .kw-chip.r2 { border-color: #c0c0c0; } .kw-chip.r2 .word { color: #c0c0c0; }
   .kw-chip.r3 { border-color: #cd7f32; } .kw-chip.r3 .word { color: #cd7f32; }
-  .bar-chart { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .bar-row { display: grid; grid-template-columns: 90px 1fr 36px; align-items: center; gap: 8px; }
-  .bar-label { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .bar-track { background: var(--black); height: 12px; border: 1px solid var(--mid); }
+  .bar-chart { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .bar-row { display: grid; grid-template-columns: 100px 1fr 40px; align-items: center; gap: 10px; }
+  .bar-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { background: var(--black); height: 14px; border: 1px solid var(--mid); }
   .bar-fill { height: 100%; background: var(--red); }
-  .bar-val { font-size: 9px; color: var(--red); }
-  .log-panel { padding: 12px 16px; border-top: 1px solid var(--mid); font-size: 9px; color: #444; line-height: 2; min-height: 60px; }
+  .bar-val { font-size: 11px; color: var(--red); }
+  .log-panel { padding: 14px 18px; border-top: 1px solid var(--mid); font-size: 11px; color: #444; line-height: 2; min-height: 70px; }
   .log-entry.active { color: #888; } .log-entry.done { color: #3a3; } .log-entry.err { color: #c44; }
-  .item-entry { padding: 10px 16px; border-bottom: 1px solid var(--mid); }
+  .item-entry { padding: 12px 18px; border-bottom: 1px solid var(--mid); }
   .item-entry:last-child { border-bottom: none; }
-  .item-name { font-size: 10px; margin-bottom: 4px; line-height: 1.4; }
-  .item-meta { display: flex; gap: 10px; font-size: 9px; color: #555; }
-  .kw-badge { display: inline-block; font-size: 9px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 6px; margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
-  .empty { width:100%;padding:40px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;text-transform:uppercase;line-height:1.8; }
+  .item-name { font-size: 12px; margin-bottom: 5px; line-height: 1.4; }
+  .item-meta { display: flex; gap: 12px; font-size: 10px; color: #555; }
+  .kw-badge { display: inline-block; font-size: 10px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 8px; margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
+  .empty { width:100%;padding:40px 20px;text-align:center;color:#333;font-size:12px;letter-spacing:2px;text-transform:uppercase;line-height:2; }
 </style>
 </head>
 <body>
 <header>
   <div class="tag">LIVE SCANNER</div>
   <h1>RBLX <span>TREND</span> SCANNER</h1>
-  <div style="font-size:10px;color:#333;letter-spacing:2px;margin-top:4px;">2D CLOTHING KEYWORD ANALYZER</div>
+  <div style="font-size:11px;color:#333;letter-spacing:2px;margin-top:4px;">2D CLOTHING KEYWORD ANALYZER</div>
 </header>
 <div class="proxy-bar">
   <div class="proxy-dot"></div>
@@ -79,8 +79,8 @@
     <div class="control-label">Sort</div>
     <div class="btn-group">
       <button class="active" data-sort="2">Trending</button>
-      <button data-sort="0">Relevance</button>
       <button data-sort="3">Favorited</button>
+      <button data-sort="0">Relevance</button>
     </div>
   </div>
   <div class="control-row">
@@ -89,7 +89,7 @@
       <button class="cat-btn active" data-assettype="11">Shirts</button>
       <button class="cat-btn" data-assettype="12">Pants</button>
       <button class="cat-btn" data-assettype="2">T-Shirts</button>
-      <button class="cat-btn" data-assettype="">All Clothing</button>
+      <button class="cat-btn" data-assettype="">All</button>
     </div>
   </div>
   <button class="scan-btn" id="scanBtn"><span class="dot"></span>SCAN TRENDS</button>
@@ -109,7 +109,7 @@
 </div>
 <script>
 var PROXY = "https://rblx-proxy-wztg.onrender.com";
-var SW = {"the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,"from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"be":1,"not":1,"no":1,"so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"cool":1,"nice":1,"cute":1,"best":1,"good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,"roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"ugc":1,"free":1,"sale":1,"ver":1,"the":1,"type":1};
+var SW = {"the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,"from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"be":1,"not":1,"no":1,"so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"cool":1,"nice":1,"cute":1,"best":1,"good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,"roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"ugc":1,"free":1,"sale":1,"ver":1,"type":1,"wear":1};
 var currentSort = "2";
 var currentAssetType = "11";
 var currentView = "chips";
@@ -163,35 +163,34 @@ async function scan() {
   log("Connecting...");
 
   try {
-    var params = "Category=3&SortType=" + currentSort + "&SortAggregation=0&Limit=30";
+    var params = "Category=3&SortType=" + currentSort + "&SortAggregation=0&Limit=28";
     if (currentAssetType) params += "&AssetTypeId=" + currentAssetType;
-    log("Params: " + params);
     var r = await fetch(PROXY + "/catalog?" + params);
     var d = await r.json();
-    log("Got " + (d.data ? d.data.length : 0) + " IDs");
+    var ids = (d.data||[]).filter(function(i){return i.itemType==="Asset";}).map(function(i){return i.id;});
+    log("Got " + ids.length + " item IDs...");
 
-    if (d.data && d.data.length) {
-      var ids = d.data.filter(function(i){return i.itemType==="Asset";}).map(function(i){return {itemType:"Asset",id:i.id};});
-      log("Fetching details for " + ids.length + " items...");
+    if (ids.length) {
+      var payload = JSON.stringify({items: ids.map(function(id){return {itemType:"Asset",id:id};})});
       var r2 = await fetch(PROXY + "/details", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({items: ids})
+        body: payload
       });
       var d2 = await r2.json();
-      log("Details received: " + (d2.data ? d2.data.length : 0));
-      if (d2.data) {
-        d2.data.forEach(function(item) {
-          var name = item.name || "";
-          var k = kw(name);
-          if (!k) return;
-          items.push({name:name,keyword:k,favorites:item.favoriteCount||0,price:item.price||0});
-          freq[k] = (freq[k]||0) + 1;
-        });
-      }
+      var details = d2.data || d2.Data || [];
+      log("Details: " + details.length + " items");
+
+      details.forEach(function(item) {
+        var name = item.name || item.Name || "";
+        var k = kw(name);
+        if (!k || !name) return;
+        items.push({name:name, keyword:k, favorites:item.favoriteCount||0, price:item.price||0});
+        freq[k] = (freq[k]||0) + 1;
+      });
       log("Done! " + items.length + " items, " + Object.keys(freq).length + " keywords.", "done");
     } else {
-      log("No data: " + JSON.stringify(d).slice(0,80), "err");
+      log("No IDs returned.", "err");
     }
   } catch(e) {
     log("Error: " + e.message, "err");
