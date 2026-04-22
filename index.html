@@ -5,20 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RBLX Trend Scanner</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
   :root { --red: #ff3131; --black: #0a0a0a; --white: #f0f0f0; --gray: #1a1a1a; --mid: #2a2a2a; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--black); color: var(--white); font-family: 'Space Mono', monospace; min-height: 100vh; }
-  body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px); pointer-events: none; z-index: 999; }
   header { padding: 28px 24px 16px; border-bottom: 2px solid var(--red); }
   header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 6px; line-height: 1; }
   header h1 span { color: var(--red); }
-  .tag { font-size: 10px; letter-spacing: 3px; color: var(--red); border: 1px solid var(--red); padding: 3px 7px; text-transform: uppercase; margin-bottom: 5px; animation: blink 1.4s step-end infinite; display: inline-block; }
+  .tag { font-size: 10px; letter-spacing: 3px; color: var(--red); border: 1px solid var(--red); padding: 3px 7px; text-transform: uppercase; margin-bottom: 5px; display: inline-block; animation: blink 1.4s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
   .proxy-bar { background: #111; border-bottom: 1px solid var(--mid); padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
-  .proxy-dot { width: 8px; height: 8px; background: #3a3; border-radius: 50%; flex-shrink: 0; animation: blink 1.4s step-end infinite; }
+  .proxy-dot { width: 8px; height: 8px; background: #3a3; border-radius: 50%; animation: blink 1.4s step-end infinite; }
   .proxy-label { font-size: 10px; letter-spacing: 2px; color: #3a3; text-transform: uppercase; }
-  .proxy-url { font-size: 9px; letter-spacing: 1px; color: #444; margin-left: auto; }
+  .proxy-url { font-size: 9px; color: #444; margin-left: auto; }
   .controls { padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--mid); }
   .control-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .control-label { font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; width: 70px; flex-shrink: 0; }
@@ -27,42 +26,41 @@
   .btn-group button:last-child { border-right: none; }
   .btn-group button.active, .btn-group button:hover { background: var(--red); }
   .cat-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .cat-btn { background: transparent; color: var(--white); border: 1px solid var(--mid); padding: 7px 12px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
+  .cat-btn { background: transparent; color: var(--white); border: 1px solid var(--mid); padding: 7px 12px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
   .cat-btn.active { border-color: var(--red); color: var(--red); }
-  .scan-btn { width: 100%; background: var(--red); color: var(--white); border: none; padding: 14px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.2s; margin-top: 4px; }
+  .scan-btn { width: 100%; background: var(--red); color: var(--white); border: none; padding: 14px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
   .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .dot { width: 8px; height: 8px; background: white; border-radius: 50%; flex-shrink: 0; }
+  .dot { width: 8px; height: 8px; background: white; border-radius: 50%; }
   .scan-btn.scanning .dot { animation: pulse 0.6s ease-in-out infinite alternate; }
-  @keyframes pulse { from{transform:scale(1);opacity:1} to{transform:scale(1.6);opacity:0.4} }
+  @keyframes pulse { from{transform:scale(1)}to{transform:scale(1.8);opacity:0.3} }
   .panel { background: var(--gray); border: 1px solid var(--mid); margin: 20px 24px; }
-  .panel-header { padding: 11px 18px; border-bottom: 1px solid var(--mid); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; align-items: center; }
-  .panel-header .count { color: var(--red); font-size: 11px; }
+  .panel-header { padding: 11px 18px; border-bottom: 1px solid var(--mid); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; }
+  .panel-header .count { color: var(--red); }
   .view-tabs { display: flex; border-bottom: 1px solid var(--mid); }
-  .view-tab { padding: 9px 18px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-right: 1px solid var(--mid); background: transparent; color: #555; border-top: none; border-left: none; border-bottom: none; font-family: 'Space Mono', monospace; transition: all 0.15s; }
+  .view-tab { padding: 9px 18px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-right: 1px solid var(--mid); background: transparent; color: #555; border-top:none;border-left:none;border-bottom:none; font-family: 'Space Mono', monospace; }
   .view-tab.active { color: var(--white); background: var(--mid); }
-  .keyword-grid { padding: 16px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 200px; align-content: flex-start; }
+  .keyword-grid { padding: 16px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 180px; align-content: flex-start; }
   .kw-chip { display: flex; align-items: center; gap: 8px; background: var(--black); border: 1px solid var(--mid); padding: 6px 10px; position: relative; overflow: hidden; }
+  .kw-chip .bar { position: absolute; left:0;top:0;bottom:0; background: var(--red); opacity: 0.12; }
   .kw-chip .word { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; position: relative; }
   .kw-chip .freq { font-size: 9px; color: var(--red); position: relative; }
-  .kw-chip.rank-1 { border-color: #ffd700; } .kw-chip.rank-1 .word { color: #ffd700; }
-  .kw-chip.rank-2 { border-color: #c0c0c0; } .kw-chip.rank-2 .word { color: #c0c0c0; }
-  .kw-chip.rank-3 { border-color: #cd7f32; } .kw-chip.rank-3 .word { color: #cd7f32; }
+  .kw-chip.r1 { border-color: #ffd700; } .kw-chip.r1 .word { color: #ffd700; }
+  .kw-chip.r2 { border-color: #c0c0c0; } .kw-chip.r2 .word { color: #c0c0c0; }
+  .kw-chip.r3 { border-color: #cd7f32; } .kw-chip.r3 .word { color: #cd7f32; }
   .bar-chart { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .bar-row { display: grid; grid-template-columns: 80px 1fr 36px; align-items: center; gap: 8px; }
+  .bar-row { display: grid; grid-template-columns: 90px 1fr 36px; align-items: center; gap: 8px; }
   .bar-label { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bar-track { background: var(--black); height: 12px; border: 1px solid var(--mid); }
-  .bar-fill { height: 100%; background: var(--red); transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+  .bar-fill { height: 100%; background: var(--red); }
   .bar-val { font-size: 9px; color: var(--red); }
-  .log-panel { padding: 12px 16px; border-top: 1px solid var(--mid); font-size: 9px; color: #444; letter-spacing: 1px; line-height: 2; min-height: 60px; }
+  .log-panel { padding: 12px 16px; border-top: 1px solid var(--mid); font-size: 9px; color: #444; line-height: 2; min-height: 60px; }
   .log-entry.active { color: #888; } .log-entry.done { color: #3a3; } .log-entry.err { color: #c44; }
   .item-entry { padding: 10px 16px; border-bottom: 1px solid var(--mid); }
   .item-entry:last-child { border-bottom: none; }
   .item-name { font-size: 10px; margin-bottom: 4px; line-height: 1.4; }
   .item-meta { display: flex; gap: 10px; font-size: 9px; color: #555; }
-  .keyword-badge { display: inline-block; font-size: 9px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 6px; margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
-  .empty-state { width: 100%; padding: 40px 20px; text-align: center; color: #333; }
-  .empty-state .icon { font-size: 36px; display: block; margin-bottom: 10px; }
-  .empty-state p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; }
+  .kw-badge { display: inline-block; font-size: 9px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 6px; margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+  .empty { width:100%;padding:40px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;text-transform:uppercase;line-height:1.8; }
 </style>
 </head>
 <body>
@@ -78,19 +76,20 @@
 </div>
 <div class="controls">
   <div class="control-row">
-    <div class="control-label">Period</div>
+    <div class="control-label">Sort</div>
     <div class="btn-group">
-      <button class="active" data-period="0">All Time</button>
-      <button data-period="1">Past Day</button>
-      <button data-period="2">Past Week</button>
+      <button class="active" data-sort="2">Trending</button>
+      <button data-sort="0">Relevance</button>
+      <button data-sort="3">Favorited</button>
     </div>
   </div>
   <div class="control-row">
     <div class="control-label">Category</div>
     <div class="cat-group">
-      <button class="cat-btn active" data-cat="12">Shirts</button>
-      <button class="cat-btn" data-cat="13">Pants</button>
-      <button class="cat-btn" data-cat="2">T-Shirts</button>
+      <button class="cat-btn active" data-assettype="11">Shirts</button>
+      <button class="cat-btn" data-assettype="12">Pants</button>
+      <button class="cat-btn" data-assettype="2">T-Shirts</button>
+      <button class="cat-btn" data-assettype="">All Clothing</button>
     </div>
   </div>
   <button class="scan-btn" id="scanBtn"><span class="dot"></span>SCAN TRENDS</button>
@@ -101,156 +100,137 @@
     <button class="view-tab active" data-view="chips">Cloud</button>
     <button class="view-tab" data-view="bars">Chart</button>
   </div>
-  <div id="keywordDisplay">
-    <div class="keyword-grid"><div class="empty-state"><span class="icon">📡</span><p>Press SCAN TRENDS<br>to analyze live data</p></div></div>
-  </div>
+  <div id="keywordDisplay"><div class="keyword-grid"><div class="empty">Press SCAN TRENDS<br>to analyze live data</div></div></div>
   <div class="log-panel" id="logPanel"><div class="log-entry">// ready</div></div>
 </div>
 <div class="panel">
   <div class="panel-header"><span>Scanned Items</span><span class="count" id="itemCount">-</span></div>
-  <div id="itemList"><div style="padding:30px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div></div>
+  <div id="itemList"><div class="empty">NO DATA YET</div></div>
 </div>
 <script>
 var PROXY = "https://rblx-proxy-wztg.onrender.com";
-
-var STOPWORDS = {"the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,"from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"their":1,"not":1,"no":1,"so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"big":1,"small":1,"cool":1,"nice":1,"cute":1,"best":1,"good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,"wear":1,"roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"edition":1,"limited":1,"ugc":1,"free":1,"sale":1,"store":1,"shop":1,"buy":1,"get":1,"ver":1,"version":1};
-
-var currentPeriod = "0";
-var currentCat = "12";
+var SW = {"the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,"from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"be":1,"not":1,"no":1,"so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"cool":1,"nice":1,"cute":1,"best":1,"good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,"roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"ugc":1,"free":1,"sale":1,"ver":1,"the":1,"type":1};
+var currentSort = "2";
+var currentAssetType = "11";
 var currentView = "chips";
-var scannedItems = [];
-var keywordFreq = {};
-var isScanning = false;
+var items = [];
+var freq = {};
+var scanning = false;
 
-document.querySelectorAll(".btn-group button").forEach(function(btn) {
-  btn.addEventListener("click", function() {
-    document.querySelectorAll(".btn-group button").forEach(function(b) { b.classList.remove("active"); });
-    btn.classList.add("active");
-    currentPeriod = btn.dataset.period;
+document.querySelectorAll(".btn-group button").forEach(function(b) {
+  b.addEventListener("click", function() {
+    document.querySelectorAll(".btn-group button").forEach(function(x){x.classList.remove("active");});
+    b.classList.add("active"); currentSort = b.dataset.sort;
   });
 });
-
-document.querySelectorAll(".cat-btn").forEach(function(btn) {
-  btn.addEventListener("click", function() {
-    document.querySelectorAll(".cat-btn").forEach(function(b) { b.classList.remove("active"); });
-    btn.classList.add("active");
-    currentCat = btn.dataset.cat;
+document.querySelectorAll(".cat-btn").forEach(function(b) {
+  b.addEventListener("click", function() {
+    document.querySelectorAll(".cat-btn").forEach(function(x){x.classList.remove("active");});
+    b.classList.add("active"); currentAssetType = b.dataset.assettype;
   });
 });
-
-document.querySelectorAll(".view-tab").forEach(function(tab) {
-  tab.addEventListener("click", function() {
-    document.querySelectorAll(".view-tab").forEach(function(t) { t.classList.remove("active"); });
-    tab.classList.add("active");
-    currentView = tab.dataset.view;
-    renderKeywords();
+document.querySelectorAll(".view-tab").forEach(function(t) {
+  t.addEventListener("click", function() {
+    document.querySelectorAll(".view-tab").forEach(function(x){x.classList.remove("active");});
+    t.classList.add("active"); currentView = t.dataset.view; renderKw();
   });
 });
 
 function log(msg, type) {
-  type = type || "active";
-  var logPanel = document.getElementById("logPanel");
-  var entries = logPanel.querySelectorAll(".log-entry");
-  entries.forEach(function(e) { e.classList.remove("active"); });
-  var div = document.createElement("div");
-  div.className = "log-entry " + type;
-  div.textContent = "> " + msg;
-  logPanel.appendChild(div);
-  if (logPanel.children.length > 5) logPanel.removeChild(logPanel.firstChild);
+  var p = document.getElementById("logPanel");
+  p.querySelectorAll(".log-entry").forEach(function(e){e.classList.remove("active");});
+  var d = document.createElement("div");
+  d.className = "log-entry " + (type||"active");
+  d.textContent = "> " + msg;
+  p.appendChild(d);
+  if (p.children.length > 6) p.removeChild(p.firstChild);
 }
 
-function extractKeyword(name) {
-  var words = name.toLowerCase().replace(/[^a-z\s]/g, " ").split(/\s+/).filter(function(w) {
-    return w.length > 2 && !STOPWORDS[w];
-  });
+function kw(name) {
+  var words = name.toLowerCase().replace(/[^a-z\s]/g," ").split(/\s+/).filter(function(w){return w.length>2&&!SW[w];});
   if (!words.length) return null;
-  words.sort(function(a, b) { return b.length - a.length; });
+  words.sort(function(a,b){return b.length-a.length;});
   return words[0];
 }
 
-async function runScan() {
-  if (isScanning) return;
-  isScanning = true;
-  var scanBtn = document.getElementById("scanBtn");
-  scanBtn.disabled = true;
-  scanBtn.classList.add("scanning");
-  scannedItems = [];
-  keywordFreq = {};
+async function scan() {
+  if (scanning) return;
+  scanning = true;
+  var btn = document.getElementById("scanBtn");
+  btn.disabled = true; btn.classList.add("scanning");
+  items = []; freq = {};
   document.getElementById("logPanel").innerHTML = "";
-
-  log("Connecting to proxy...");
+  log("Connecting...");
 
   try {
-    var params = "Category=3&Subcategory=" + currentCat + "&SortType=2&SortAggregation=" + currentPeriod + "&Limit=30";
-    var url = PROXY + "/catalog?" + params;
-    log("Fetching: " + params);
-    var r = await fetch(url);
-    var data = await r.json();
-    log("Got response, items: " + (data.data ? data.data.length : 0));
+    var params = "Category=3&SortType=" + currentSort + "&SortAggregation=0&Limit=30";
+    if (currentAssetType) params += "&AssetTypeId=" + currentAssetType;
+    log("Params: " + params);
+    var r = await fetch(PROXY + "/catalog?" + params);
+    var d = await r.json();
+    log("Got " + (d.data ? d.data.length : 0) + " IDs");
 
-    if (data.data && data.data.length > 0) {
-      data.data.forEach(function(item) {
-        var name = item.name || item.Name || "";
-        var kw = extractKeyword(name);
-        if (!kw) return;
-        scannedItems.push({ name: name, keyword: kw, favorites: item.favoriteCount || 0, price: item.price || 0 });
-        keywordFreq[kw] = (keywordFreq[kw] || 0) + 1;
+    if (d.data && d.data.length) {
+      var ids = d.data.filter(function(i){return i.itemType==="Asset";}).map(function(i){return {itemType:"Asset",id:i.id};});
+      log("Fetching details for " + ids.length + " items...");
+      var r2 = await fetch(PROXY + "/details", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({items: ids})
       });
-      log("Done! " + scannedItems.length + " items, " + Object.keys(keywordFreq).length + " keywords.", "done");
+      var d2 = await r2.json();
+      log("Details received: " + (d2.data ? d2.data.length : 0));
+      if (d2.data) {
+        d2.data.forEach(function(item) {
+          var name = item.name || "";
+          var k = kw(name);
+          if (!k) return;
+          items.push({name:name,keyword:k,favorites:item.favoriteCount||0,price:item.price||0});
+          freq[k] = (freq[k]||0) + 1;
+        });
+      }
+      log("Done! " + items.length + " items, " + Object.keys(freq).length + " keywords.", "done");
     } else {
-      log("No items returned. Response: " + JSON.stringify(data).slice(0, 100), "err");
+      log("No data: " + JSON.stringify(d).slice(0,80), "err");
     }
   } catch(e) {
     log("Error: " + e.message, "err");
   }
 
-  renderItems();
-  renderKeywords();
-  document.getElementById("itemCount").textContent = scannedItems.length + " items";
-  document.getElementById("kwCount").textContent = Object.keys(keywordFreq).length + " keywords";
-  isScanning = false;
-  scanBtn.disabled = false;
-  scanBtn.classList.remove("scanning");
+  renderItems(); renderKw();
+  document.getElementById("itemCount").textContent = items.length + " items";
+  document.getElementById("kwCount").textContent = Object.keys(freq).length + " keywords";
+  scanning = false; btn.disabled = false; btn.classList.remove("scanning");
 }
 
-function renderKeywords() {
-  var sorted = Object.entries(keywordFreq).sort(function(a,b) { return b[1]-a[1]; }).slice(0,20);
+function renderKw() {
+  var sorted = Object.entries(freq).sort(function(a,b){return b[1]-a[1];}).slice(0,20);
   var max = sorted[0] ? sorted[0][1] : 1;
-  var display = document.getElementById("keywordDisplay");
-
-  if (!sorted.length) {
-    display.innerHTML = "<div class=\"keyword-grid\"><div class=\"empty-state\"><span class=\"icon\">📡</span><p>Press SCAN TRENDS<br>to analyze live data</p></div></div>";
-    return;
-  }
-
+  var el = document.getElementById("keywordDisplay");
+  if (!sorted.length) { el.innerHTML = "<div class=\"keyword-grid\"><div class=\"empty\">Press SCAN TRENDS<br>to analyze live data</div></div>"; return; }
   if (currentView === "chips") {
-    display.innerHTML = "<div class=\"keyword-grid\">" + sorted.map(function(entry, i) {
-      var word = entry[0], count = entry[1];
-      var pct = Math.round(count/max*100);
-      var rc = i===0?"rank-1":i===1?"rank-2":i===2?"rank-3":"";
-      return "<div class=\"kw-chip " + rc + "\"><span style=\"position:absolute;left:0;top:0;bottom:0;width:" + pct + "%;background:var(--red);opacity:0.12;\"></span><span class=\"word\">" + word + "</span><span class=\"freq\">x" + count + "</span></div>";
+    el.innerHTML = "<div class=\"keyword-grid\">" + sorted.map(function(e,i){
+      var w=e[0],c=e[1],pct=Math.round(c/max*100);
+      var rc=i===0?"r1":i===1?"r2":i===2?"r3":"";
+      return "<div class=\"kw-chip "+rc+"\"><span class=\"bar\" style=\"width:"+pct+"%\"></span><span class=\"word\">"+w+"</span><span class=\"freq\">x"+c+"</span></div>";
     }).join("") + "</div>";
   } else {
-    display.innerHTML = "<div class=\"bar-chart\">" + sorted.slice(0,12).map(function(entry) {
-      var word = entry[0], count = entry[1];
-      var pct = (count/max*100).toFixed(1);
-      return "<div class=\"bar-row\"><div class=\"bar-label\">" + word + "</div><div class=\"bar-track\"><div class=\"bar-fill\" style=\"width:" + pct + "%\"></div></div><div class=\"bar-val\">x" + count + "</div></div>";
+    el.innerHTML = "<div class=\"bar-chart\">" + sorted.slice(0,12).map(function(e){
+      var w=e[0],c=e[1],pct=(c/max*100).toFixed(1);
+      return "<div class=\"bar-row\"><div class=\"bar-label\">"+w+"</div><div class=\"bar-track\"><div class=\"bar-fill\" style=\"width:"+pct+"%\"></div></div><div class=\"bar-val\">x"+c+"</div></div>";
     }).join("") + "</div>";
   }
 }
 
 function renderItems() {
-  var itemList = document.getElementById("itemList");
-  if (!scannedItems.length) {
-    itemList.innerHTML = "<div style=\"padding:30px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;\">NO DATA YET</div>";
-    return;
-  }
-  itemList.innerHTML = scannedItems.slice(0,40).map(function(item) {
-    return "<div class=\"item-entry\"><div class=\"item-name\">" + item.name + "</div><div class=\"item-meta\"><span>fav " + (item.favorites||0).toLocaleString() + "</span><span>" + (item.price ? item.price+"R$" : "FREE") + "</span></div><span class=\"keyword-badge\">" + item.keyword + "</span></div>";
+  var el = document.getElementById("itemList");
+  if (!items.length) { el.innerHTML = "<div class=\"empty\">NO DATA YET</div>"; return; }
+  el.innerHTML = items.slice(0,40).map(function(item){
+    return "<div class=\"item-entry\"><div class=\"item-name\">"+item.name+"</div><div class=\"item-meta\"><span>fav "+item.favorites.toLocaleString()+"</span><span>"+(item.price?item.price+"R$":"FREE")+"</span></div><span class=\"kw-badge\">"+item.keyword+"</span></div>";
   }).join("");
 }
 
-document.getElementById("scanBtn").addEventListener("click", runScan);
+document.getElementById("scanBtn").addEventListener("click", scan);
 </script>
 </body>
 </html>
