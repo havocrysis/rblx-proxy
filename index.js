@@ -1,5 +1,4 @@
 const express = require('express');
-const fetch = require('node-fetch');
 const app = express();
 
 app.use(express.json());
@@ -27,4 +26,19 @@ app.get('/catalog', async (req, res) => {
 
 app.post('/details', async (req, res) => {
   try {
-    const r​​​​​​​​​​​​​​​​
+    const r = await fetch('https://catalog.roblox.com/v1/catalog/items/details', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(req.body)
+    });
+    const data = await r.json();
+    res.json(data);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.get('/', (req, res) => res.json({ status: 'RBLX proxy running ✓' }));
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Proxy live on port ${PORT}`));
