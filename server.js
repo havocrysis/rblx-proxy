@@ -10,8 +10,13 @@ app.use(function(req, res, next) {
 });
 
 async function getXsrfToken() {
-  var r = await fetch("https://auth.roblox.com/v2/logout", { method: "POST", headers: { "Content-Type": "application/json" } });
-  return r.headers.get("x-csrf-token") || "";
+  var r = await fetch("https://catalog.roblox.com/v1/catalog/items/details", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: "{}"
+  });
+  var token = r.headers.get("x-csrf-token");
+  return token || "";
 }
 
 app.get("/catalog", async function(req, res) {
