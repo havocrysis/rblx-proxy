@@ -36,17 +36,13 @@ z-index: 999;
 }
 
 header {
-padding: 28px 32px 16px;
+padding: 28px 24px 16px;
 border-bottom: 2px solid var(–red);
-display: flex;
-align-items: flex-end;
-gap: 20px;
-flex-wrap: wrap;
 }
 
 header h1 {
 font-family: ‘Bebas Neue’, sans-serif;
-font-size: clamp(32px, 6vw, 64px);
+font-size: 52px;
 letter-spacing: 6px;
 line-height: 1;
 }
@@ -67,77 +63,59 @@ display: inline-block;
 
 @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
 
-/* Proxy setup banner */
 .proxy-bar {
 background: #111;
 border-bottom: 1px solid var(–mid);
-padding: 12px 32px;
+padding: 10px 24px;
 display: flex;
 align-items: center;
-gap: 12px;
-flex-wrap: wrap;
+gap: 10px;
 }
 
-.proxy-bar label {
+.proxy-dot {
+width: 8px; height: 8px;
+background: #3a3;
+border-radius: 50%;
+flex-shrink: 0;
+animation: blink 1.4s step-end infinite;
+}
+
+.proxy-label {
 font-size: 10px;
 letter-spacing: 2px;
+color: #3a3;
 text-transform: uppercase;
-color: #666;
-white-space: nowrap;
 }
 
-.proxy-bar input {
-flex: 1;
-min-width: 200px;
-background: var(–black);
-border: 1px solid var(–mid);
-color: var(–white);
-font-family: ‘Space Mono’, monospace;
-font-size: 11px;
-padding: 8px 12px;
+.proxy-url {
+font-size: 9px;
 letter-spacing: 1px;
-outline: none;
-transition: border-color 0.2s;
+color: #444;
+margin-left: auto;
 }
-
-.proxy-bar input:focus { border-color: var(–red); }
-.proxy-bar input::placeholder { color: #444; }
-
-.proxy-status {
-font-size: 10px;
-letter-spacing: 2px;
-padding: 6px 12px;
-border: 1px solid;
-white-space: nowrap;
-}
-
-.proxy-status.none { color: #555; border-color: #333; }
-.proxy-status.ok   { color: #3a3; border-color: #3a3; }
-.proxy-status.err  { color: var(–red); border-color: var(–red); }
-
-.test-btn {
-background: transparent;
-border: 1px solid var(–mid);
-color: #888;
-font-family: ‘Space Mono’, monospace;
-font-size: 10px;
-letter-spacing: 2px;
-padding: 8px 14px;
-cursor: pointer;
-text-transform: uppercase;
-transition: all 0.15s;
-white-space: nowrap;
-}
-
-.test-btn:hover { border-color: var(–white); color: var(–white); }
 
 .controls {
-padding: 20px 32px;
+padding: 16px 24px;
 display: flex;
+flex-direction: column;
 gap: 12px;
-align-items: center;
-flex-wrap: wrap;
 border-bottom: 1px solid var(–mid);
+}
+
+.control-row {
+display: flex;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+}
+
+.control-label {
+font-size: 10px;
+letter-spacing: 2px;
+color: #555;
+text-transform: uppercase;
+width: 70px;
+flex-shrink: 0;
 }
 
 .btn-group { display: flex; border: 1px solid var(–mid); }
@@ -146,9 +124,9 @@ border-bottom: 1px solid var(–mid);
 background: transparent;
 color: var(–white);
 border: none;
-padding: 8px 16px;
+padding: 8px 14px;
 font-family: ‘Space Mono’, monospace;
-font-size: 11px;
+font-size: 10px;
 letter-spacing: 2px;
 cursor: pointer;
 text-transform: uppercase;
@@ -165,7 +143,7 @@ border-right: 1px solid var(–mid);
 background: transparent;
 color: var(–white);
 border: 1px solid var(–mid);
-padding: 8px 14px;
+padding: 7px 12px;
 font-family: ‘Space Mono’, monospace;
 font-size: 10px;
 letter-spacing: 1px;
@@ -177,20 +155,22 @@ transition: all 0.15s;
 .cat-btn.active { border-color: var(–red); color: var(–red); }
 
 .scan-btn {
-margin-left: auto;
+width: 100%;
 background: var(–red);
 color: var(–white);
 border: none;
-padding: 10px 22px;
+padding: 14px;
 font-family: ‘Space Mono’, monospace;
-font-size: 11px;
-letter-spacing: 3px;
+font-size: 12px;
+letter-spacing: 4px;
 cursor: pointer;
 text-transform: uppercase;
 display: flex;
 align-items: center;
-gap: 8px;
+justify-content: center;
+gap: 10px;
 transition: opacity 0.2s;
+margin-top: 4px;
 }
 
 .scan-btn:hover { opacity: 0.85; }
@@ -206,14 +186,11 @@ flex-shrink: 0;
 .scan-btn.scanning .dot { animation: pulse 0.6s ease-in-out infinite alternate; }
 @keyframes pulse { from{transform:scale(1);opacity:1} to{transform:scale(1.6);opacity:0.4} }
 
-main {
-padding: 28px 32px;
-display: grid;
-grid-template-columns: 1fr 300px;
-gap: 28px;
+.panel {
+background: var(–gray);
+border: 1px solid var(–mid);
+margin: 20px 24px;
 }
-
-.panel { background: var(–gray); border: 1px solid var(–mid); }
 
 .panel-header {
 padding: 11px 18px;
@@ -248,11 +225,11 @@ transition: all 0.15s;
 .view-tab.active { color: var(–white); background: var(–mid); }
 
 .keyword-grid {
-padding: 20px;
+padding: 16px;
 display: flex;
 flex-wrap: wrap;
-gap: 10px;
-min-height: 260px;
+gap: 8px;
+min-height: 200px;
 align-content: flex-start;
 }
 
@@ -262,9 +239,7 @@ align-items: center;
 gap: 8px;
 background: var(–black);
 border: 1px solid var(–mid);
-padding: 7px 12px;
-cursor: default;
-transition: border-color 0.15s;
+padding: 6px 10px;
 position: relative;
 overflow: hidden;
 }
@@ -278,14 +253,14 @@ opacity: 0.12;
 }
 
 .kw-chip .word {
-font-size: 12px;
+font-size: 11px;
 font-weight: 700;
 letter-spacing: 1px;
 text-transform: uppercase;
 position: relative;
 }
 
-.kw-chip .freq { font-size: 10px; color: var(–red); position: relative; }
+.kw-chip .freq { font-size: 9px; color: var(–red); position: relative; }
 
 .kw-chip.rank-1 { border-color: #ffd700; }
 .kw-chip.rank-1 .word { color: #ffd700; }
@@ -294,54 +269,47 @@ position: relative;
 .kw-chip.rank-3 { border-color: #cd7f32; }
 .kw-chip.rank-3 .word { color: #cd7f32; }
 
-.bar-chart { padding: 18px 22px; display: flex; flex-direction: column; gap: 10px; }
+.bar-chart { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
 
 .bar-row {
 display: grid;
-grid-template-columns: 90px 1fr 36px;
+grid-template-columns: 80px 1fr 36px;
 align-items: center;
-gap: 10px;
+gap: 8px;
 }
 
 .bar-label {
-font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
 text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-.bar-track { background: var(–black); height: 13px; border: 1px solid var(–mid); }
+.bar-track { background: var(–black); height: 12px; border: 1px solid var(–mid); }
 .bar-fill { height: 100%; background: var(–red); transition: width 0.6s cubic-bezier(.4,0,.2,1); }
-.bar-val { font-size: 10px; color: var(–red); letter-spacing: 1px; }
+.bar-val { font-size: 9px; color: var(–red); }
 
 .log-panel {
-padding: 14px 18px;
+padding: 12px 16px;
 border-top: 1px solid var(–mid);
-font-size: 10px;
+font-size: 9px;
 color: #444;
 letter-spacing: 1px;
 line-height: 2;
-min-height: 70px;
+min-height: 60px;
 }
 
 .log-entry.active { color: #888; }
 .log-entry.done { color: #3a3; }
 .log-entry.err { color: #c44; }
 
-.item-list { overflow-y: auto; max-height: 460px; }
-
 .item-entry {
-padding: 11px 18px;
+padding: 10px 16px;
 border-bottom: 1px solid var(–mid);
 transition: background 0.15s;
 }
 
-.item-entry:hover { background: var(–mid); }
 .item-entry:last-child { border-bottom: none; }
-.item-entry .item-name { font-size: 10px; letter-spacing: 0.5px; margin-bottom: 4px; line-height: 1.4; }
-
-.item-entry .item-meta {
-display: flex; gap: 10px;
-font-size: 9px; color: #555; letter-spacing: 1px;
-}
+.item-name { font-size: 10px; margin-bottom: 4px; line-height: 1.4; }
+.item-meta { display: flex; gap: 10px; font-size: 9px; color: #555; }
 
 .keyword-badge {
 display: inline-block;
@@ -356,99 +324,87 @@ text-transform: uppercase;
 }
 
 .empty-state {
-width: 100%; padding: 50px 20px;
+width: 100%; padding: 40px 20px;
 text-align: center; color: #333;
 }
 
-.empty-state .icon { font-size: 40px; display: block; margin-bottom: 12px; }
+.empty-state .icon { font-size: 36px; display: block; margin-bottom: 10px; }
 .empty-state p { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; }
-
-@media (max-width: 700px) {
-main { grid-template-columns: 1fr; }
-header, .controls, .proxy-bar { padding-left: 20px; padding-right: 20px; }
-main { padding: 20px; }
-.scan-btn { margin-left: 0; width: 100%; justify-content: center; }
-}
 </style>
 
 </head>
 <body>
 
 <header>
-  <div>
-    <div class="tag">● Live Scanner</div>
-    <h1>RBLX <span>TREND</span> SCANNER</h1>
-  </div>
-  <div style="margin-bottom:6px; font-size:10px; color:#333; letter-spacing:2px;">2D CLOTHING KEYWORD ANALYZER</div>
+  <div class="tag">● Live Scanner</div>
+  <h1>RBLX <span>TREND</span> SCANNER</h1>
+  <div style="font-size:10px;color:#333;letter-spacing:2px;margin-top:4px;">2D CLOTHING KEYWORD ANALYZER</div>
 </header>
 
-<!-- Proxy URL input -->
-
 <div class="proxy-bar">
-  <label>Proxy URL</label>
-  <input type="text" id="proxyUrl" placeholder="https://your-app.onrender.com" spellcheck="false" autocomplete="off" />
-  <button class="test-btn" id="testBtn">Test Connection</button>
-  <div class="proxy-status none" id="proxyStatus">NOT SET</div>
+  <div class="proxy-dot"></div>
+  <div class="proxy-label">Proxy Connected</div>
+  <div class="proxy-url">rblx-proxy-wztg.onrender.com</div>
 </div>
 
 <div class="controls">
-  <div style="font-size:10px;letter-spacing:2px;color:#555;text-transform:uppercase;margin-right:4px;">Period</div>
-  <div class="btn-group">
-    <button class="active" data-period="daily">Daily</button>
-    <button data-period="weekly">Weekly</button>
-    <button data-period="monthly">Monthly</button>
+  <div class="control-row">
+    <div class="control-label">Period</div>
+    <div class="btn-group">
+      <button class="active" data-period="daily">Daily</button>
+      <button data-period="weekly">Weekly</button>
+      <button data-period="monthly">Monthly</button>
+    </div>
   </div>
-
-  <div style="font-size:10px;letter-spacing:2px;color:#555;text-transform:uppercase;margin-left:10px;margin-right:4px;">Category</div>
-  <div class="cat-group">
-    <button class="cat-btn active" data-cat="11">Shirts</button>
-    <button class="cat-btn" data-cat="12">Pants</button>
-    <button class="cat-btn" data-cat="2">T-Shirts</button>
+  <div class="control-row">
+    <div class="control-label">Category</div>
+    <div class="cat-group">
+      <button class="cat-btn active" data-cat="11">Shirts</button>
+      <button class="cat-btn" data-cat="12">Pants</button>
+      <button class="cat-btn" data-cat="2">T-Shirts</button>
+    </div>
   </div>
-
   <button class="scan-btn" id="scanBtn">
     <span class="dot"></span>
     SCAN TRENDS
   </button>
 </div>
 
-<main>
-  <div>
-    <div class="panel" style="margin-bottom:24px;">
-      <div class="panel-header">
-        <span>Top Trending Keywords</span>
-        <span class="count" id="kwCount">—</span>
-      </div>
-      <div class="view-tabs">
-        <button class="view-tab active" data-view="chips">Cloud</button>
-        <button class="view-tab" data-view="bars">Chart</button>
-      </div>
-      <div id="keywordDisplay">
-        <div class="keyword-grid">
-          <div class="empty-state">
-            <span class="icon">📡</span>
-            <p>Enter your proxy URL above,<br>then press SCAN TRENDS</p>
-          </div>
-        </div>
-      </div>
-      <div class="log-panel" id="logPanel">
-        <div class="log-entry">// awaiting proxy URL...</div>
+<div class="panel">
+  <div class="panel-header">
+    <span>Top Trending Keywords</span>
+    <span class="count" id="kwCount">—</span>
+  </div>
+  <div class="view-tabs">
+    <button class="view-tab active" data-view="chips">Cloud</button>
+    <button class="view-tab" data-view="bars">Chart</button>
+  </div>
+  <div id="keywordDisplay">
+    <div class="keyword-grid">
+      <div class="empty-state">
+        <span class="icon">📡</span>
+        <p>Press SCAN TRENDS<br>to analyze live data</p>
       </div>
     </div>
   </div>
+  <div class="log-panel" id="logPanel">
+    <div class="log-entry">// ready — tap scan trends</div>
+  </div>
+</div>
 
-  <div class="panel">
-    <div class="panel-header">
-      <span>Scanned Items</span>
-      <span class="count" id="itemCount">—</span>
-    </div>
-    <div class="item-list" id="itemList">
-      <div style="padding:40px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div>
-    </div>
+<div class="panel">
+  <div class="panel-header">
+    <span>Scanned Items</span>
+    <span class="count" id="itemCount">—</span>
   </div>
-</main>
+  <div id="itemList">
+    <div style="padding:30px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div>
+  </div>
+</div>
 
 <script>
+const PROXY = 'https://rblx-proxy-wztg.onrender.com';
+
 const STOPWORDS = new Set([
   'the','a','an','and','or','of','in','on','at','to','for','with','by',
   'from','is','it','its','this','that','these','those','my','your','our',
@@ -475,50 +431,13 @@ let scannedItems = [];
 let keywordFreq = {};
 let isScanning = false;
 
-const scanBtn    = document.getElementById('scanBtn');
-const logPanel   = document.getElementById('logPanel');
-const itemList   = document.getElementById('itemList');
+const scanBtn = document.getElementById('scanBtn');
+const logPanel = document.getElementById('logPanel');
+const itemList = document.getElementById('itemList');
 const keywordDisplay = document.getElementById('keywordDisplay');
-const kwCount    = document.getElementById('kwCount');
-const itemCount  = document.getElementById('itemCount');
-const proxyInput = document.getElementById('proxyUrl');
-const proxyStatus = document.getElementById('proxyStatus');
-const testBtn    = document.getElementById('testBtn');
+const kwCount = document.getElementById('kwCount');
+const itemCount = document.getElementById('itemCount');
 
-// Persist proxy URL
-const saved = localStorage.getItem('rblx_proxy');
-if (saved) proxyInput.value = saved;
-
-proxyInput.addEventListener('input', () => {
-  localStorage.setItem('rblx_proxy', proxyInput.value.trim());
-  proxyStatus.className = 'proxy-status none';
-  proxyStatus.textContent = 'NOT TESTED';
-});
-
-function getProxy() {
-  return proxyInput.value.trim().replace(/\/$/, '');
-}
-
-// Test connection
-testBtn.addEventListener('click', async () => {
-  const base = getProxy();
-  if (!base) { alert('Enter your proxy URL first.'); return; }
-  testBtn.textContent = 'Testing...';
-  testBtn.disabled = true;
-  try {
-    const r = await fetch(`${base}/`);
-    const d = await r.json();
-    proxyStatus.className = 'proxy-status ok';
-    proxyStatus.textContent = '✓ CONNECTED';
-  } catch(e) {
-    proxyStatus.className = 'proxy-status err';
-    proxyStatus.textContent = '✗ FAILED';
-  }
-  testBtn.textContent = 'Test Connection';
-  testBtn.disabled = false;
-});
-
-// Period buttons
 document.querySelectorAll('.btn-group button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.btn-group button').forEach(b => b.classList.remove('active'));
@@ -527,7 +446,6 @@ document.querySelectorAll('.btn-group button').forEach(btn => {
   });
 });
 
-// Category buttons
 document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -536,7 +454,6 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
   });
 });
 
-// View tabs
 document.querySelectorAll('.view-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
@@ -553,7 +470,7 @@ function log(msg, type = 'active') {
   div.className = `log-entry ${type}`;
   div.textContent = `> ${msg}`;
   logPanel.appendChild(div);
-  if (logPanel.children.length > 6) logPanel.removeChild(logPanel.firstChild);
+  if (logPanel.children.length > 5) logPanel.removeChild(logPanel.firstChild);
 }
 
 function extractKeyword(name) {
@@ -569,26 +486,22 @@ function extractKeyword(name) {
 }
 
 async function fetchCatalogPage(cursor = '') {
-  const base = getProxy();
   const cat = CATEGORY_MAP[currentCat];
   const sortType = currentPeriod === 'daily' ? 3 : currentPeriod === 'weekly' ? 4 : 5;
   const params = new URLSearchParams({
     category: 'Clothing',
     subcategory: cat.subcategoryId,
-    sortType,
-    sortAggregation: 1,
-    limit: 30,
+    sortType, sortAggregation: 1, limit: 30,
     ...(cursor ? { cursor } : {})
   });
-  const r = await fetch(`${base}/catalog?${params}`);
-  if (!r.ok) throw new Error(`Catalog fetch failed: ${r.status}`);
+  const r = await fetch(`${PROXY}/catalog?${params}`);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return await r.json();
 }
 
 async function fetchDetails(ids) {
   if (!ids.length) return [];
-  const base = getProxy();
-  const r = await fetch(`${base}/details`, {
+  const r = await fetch(`${PROXY}/details`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ items: ids.map(id => ({ itemType: 'Asset', id })) })
@@ -598,54 +511,48 @@ async function fetchDetails(ids) {
   return d.data || [];
 }
 
+function processItems(details) {
+  for (const item of details) {
+    const kw = extractKeyword(item.name || '');
+    if (!kw) continue;
+    scannedItems.push({ name: item.name, keyword: kw, favorites: item.favoriteCount || 0, price: item.price || 0 });
+    keywordFreq[kw] = (keywordFreq[kw] || 0) + 1;
+  }
+}
+
 async function runScan() {
   if (isScanning) return;
-  const base = getProxy();
-  if (!base) { alert('Please enter your proxy URL at the top first!'); return; }
-
   isScanning = true;
   scanBtn.disabled = true;
   scanBtn.classList.add('scanning');
-  scannedItems = [];
-  keywordFreq = {};
+  scannedItems = []; keywordFreq = {};
   logPanel.innerHTML = '';
 
-  const catName = CATEGORY_MAP[currentCat].name;
-  log(`Starting scan: ${catName} / ${currentPeriod}`);
+  log(`Scanning ${CATEGORY_MAP[currentCat].name} / ${currentPeriod}...`);
   renderItems(); renderKeywords();
 
   try {
     log('Connecting to proxy...');
     const page1 = await fetchCatalogPage();
     const ids1 = (page1.data || []).map(i => i.id);
-    log(`Got ${ids1.length} IDs — fetching details...`);
-
+    log(`Got ${ids1.length} items, fetching details...`);
     const details1 = await fetchDetails(ids1);
     processItems(details1);
 
     if (page1.nextPageCursor) {
       try {
-        log('Fetching page 2...');
         const page2 = await fetchCatalogPage(page1.nextPageCursor);
-        const ids2 = (page2.data || []).map(i => i.id);
-        const details2 = await fetchDetails(ids2);
+        const details2 = await fetchDetails((page2.data || []).map(i => i.id));
         processItems(details2);
-      } catch(e) { /* page 2 optional */ }
+      } catch(e) {}
     }
 
     log(`Done! ${scannedItems.length} items, ${Object.keys(keywordFreq).length} keywords.`, 'done');
-    proxyStatus.className = 'proxy-status ok';
-    proxyStatus.textContent = '✓ LIVE DATA';
-
   } catch(err) {
     log(`Error: ${err.message}`, 'err');
-    log('Check your proxy URL and try again.', 'err');
-    proxyStatus.className = 'proxy-status err';
-    proxyStatus.textContent = '✗ ERROR';
   }
 
-  renderItems();
-  renderKeywords();
+  renderItems(); renderKeywords();
   itemCount.textContent = `${scannedItems.length} items`;
   kwCount.textContent = `${Object.keys(keywordFreq).length} keywords`;
   isScanning = false;
@@ -653,27 +560,12 @@ async function runScan() {
   scanBtn.classList.remove('scanning');
 }
 
-function processItems(details) {
-  for (const item of details) {
-    const kw = extractKeyword(item.name || '');
-    if (!kw) continue;
-    scannedItems.push({
-      name: item.name,
-      keyword: kw,
-      favorites: item.favoriteCount || 0,
-      sales: item.sales || 0,
-      price: item.price || 0,
-    });
-    keywordFreq[kw] = (keywordFreq[kw] || 0) + 1;
-  }
-}
-
 function renderKeywords() {
   const sorted = Object.entries(keywordFreq).sort((a,b) => b[1]-a[1]).slice(0,20);
   const max = sorted[0]?.[1] || 1;
 
   if (!sorted.length) {
-    keywordDisplay.innerHTML = `<div class="keyword-grid"><div class="empty-state"><span class="icon">📡</span><p>Enter proxy URL above,<br>then press SCAN TRENDS</p></div></div>`;
+    keywordDisplay.innerHTML = `<div class="keyword-grid"><div class="empty-state"><span class="icon">📡</span><p>Press SCAN TRENDS<br>to analyze live data</p></div></div>`;
     return;
   }
 
@@ -682,35 +574,40 @@ function renderKeywords() {
       sorted.map(([word, count], i) => {
         const pct = (count/max*100).toFixed(0);
         const rc = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'';
-        return `<div class="kw-chip ${rc}" style="--p:${pct}%">
-          <style>.kw-chip[style="--p:${pct}%"]::before{width:${pct}%}</style>
-
-```
-      <span class="word">${word}</span>
-      <span class="freq">×${count}</span>
-    </div>`;
-  }).join('')
-}</div>`;
-```
-
-} else {
-keywordDisplay.innerHTML = `<div class="bar-chart">${ sorted.slice(0,12).map(([word,count]) => { const pct = (count/max*100).toFixed(1); return `<div class="bar-row">
-<div class="bar-label">${word}</div>
-<div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
-<div class="bar-val">×${count}</div>
-</div>`; }).join('') }</div>`;
-}
+        return `<div class="kw-chip ${rc}"><span class="word" style="position:relative">${word}</span><span class="freq">×${count}</span><span style="position:absolute;left:0;top:0;bottom:0;width:${pct}%;background:var(--red);opacity:0.12;"></span></div>`;
+      }).join('')
+    }</div>`;
+  } else {
+    keywordDisplay.innerHTML = `<div class="bar-chart">${
+      sorted.slice(0,12).map(([word,count]) => {
+        const pct = (count/max*100).toFixed(1);
+        return `<div class="bar-row">
+          <div class="bar-label">${word}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div class="bar-val">×${count}</div>
+        </div>`;
+      }).join('')
+    }</div>`;
+  }
 }
 
 function renderItems() {
-if (!scannedItems.length) {
-itemList.innerHTML = `<div style="padding:40px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div>`;
-return;
-}
-itemList.innerHTML = scannedItems.slice(0,40).map(item => ` <div class="item-entry"> <div class="item-name">${item.name}</div> <div class="item-meta"> <span>❤ ${(item.favorites||0).toLocaleString()}</span> <span>💰 ${item.price ? item.price+'R$' : 'FREE'}</span> </div> <span class="keyword-badge">${item.keyword}</span> </div>`).join(’’);
+  if (!scannedItems.length) {
+    itemList.innerHTML = `<div style="padding:30px 20px;text-align:center;color:#333;font-size:10px;letter-spacing:2px;">NO DATA YET</div>`;
+    return;
+  }
+  itemList.innerHTML = scannedItems.slice(0,40).map(item => `
+    <div class="item-entry">
+      <div class="item-name">${item.name}</div>
+      <div class="item-meta">
+        <span>❤ ${(item.favorites||0).toLocaleString()}</span>
+        <span>💰 ${item.price ? item.price+'R$' : 'FREE'}</span>
+      </div>
+      <span class="keyword-badge">${item.keyword}</span>
+    </div>`).join('');
 }
 
-scanBtn.addEventListener(‘click’, runScan);
+scanBtn.addEventListener('click', runScan);
 </script>
 
 </body>
