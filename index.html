@@ -9,78 +9,97 @@
   :root { --red: #ff3131; --black: #0a0a0a; --white: #f0f0f0; --gray: #1a1a1a; --mid: #2a2a2a; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--black); color: var(--white); font-family: 'Space Mono', monospace; min-height: 100vh; }
-  header { padding: 28px 24px 16px; border-bottom: 2px solid var(--red); }
-  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 6px; line-height: 1; }
+  header { padding: 24px 24px 14px; border-bottom: 2px solid var(--red); }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 60px; letter-spacing: 6px; line-height: 1; }
   header h1 span { color: var(--red); }
   .tag { font-size: 11px; letter-spacing: 3px; color: var(--red); border: 1px solid var(--red); padding: 3px 7px; text-transform: uppercase; margin-bottom: 5px; display: inline-block; animation: blink 1.4s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
-  .proxy-bar { background: #111; border-bottom: 1px solid var(--mid); padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
-  .proxy-dot { width: 9px; height: 9px; background: #3a3; border-radius: 50%; animation: blink 1.4s step-end infinite; }
-  .proxy-label { font-size: 11px; letter-spacing: 2px; color: #3a3; text-transform: uppercase; }
-  .proxy-url { font-size: 10px; color: #444; margin-left: auto; }
-  .controls { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; border-bottom: 1px solid var(--mid); }
-  .control-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .control-label { font-size: 11px; letter-spacing: 2px; color: #555; text-transform: uppercase; width: 70px; flex-shrink: 0; }
-  .btn-group { display: flex; border: 1px solid var(--mid); }
-  .btn-group button { background: transparent; color: var(--white); border: none; padding: 10px 18px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; border-right: 1px solid var(--mid); }
+  .proxy-bar { background: #111; border-bottom: 1px solid var(--mid); padding: 8px 24px; display: flex; align-items: center; gap: 10px; }
+  .proxy-dot { width: 8px; height: 8px; background: #3a3; border-radius: 50%; animation: blink 1.4s step-end infinite; }
+  .proxy-label { font-size: 10px; letter-spacing: 2px; color: #3a3; text-transform: uppercase; }
+  .proxy-url { font-size: 9px; color: #444; margin-left: auto; }
+  .controls { padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--mid); }
+  .control-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .control-label { font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; width: 75px; flex-shrink: 0; }
+  .btn-group { display: flex; border: 1px solid var(--mid); flex-wrap: wrap; }
+  .btn-group button { background: transparent; color: var(--white); border: none; padding: 8px 14px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; border-right: 1px solid var(--mid); }
   .btn-group button:last-child { border-right: none; }
   .btn-group button.active, .btn-group button:hover { background: var(--red); }
   .cat-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .cat-btn { background: transparent; color: var(--white); border: 1px solid var(--mid); padding: 9px 14px; font-family: 'Space Mono', monospace; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
+  .cat-btn { background: transparent; color: var(--white); border: 1px solid var(--mid); padding: 8px 12px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
   .cat-btn.active { border-color: var(--red); color: var(--red); }
-  .scan-btn { width: 100%; background: var(--red); color: var(--white); border: none; padding: 16px; font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
+  .scan-btn { width: 100%; background: var(--red); color: var(--white); border: none; padding: 14px; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
   .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .dot { width: 9px; height: 9px; background: white; border-radius: 50%; }
   .scan-btn.scanning .dot { animation: pulse 0.6s ease-in-out infinite alternate; }
   @keyframes pulse { from{transform:scale(1)}to{transform:scale(1.8);opacity:0.3} }
+  .auto-bar { background: #0d1a0d; border-bottom: 1px solid #1a3a1a; padding: 8px 24px; display: flex; align-items: center; gap: 12px; font-size: 10px; }
+  .auto-label { color: #3a3; letter-spacing: 2px; text-transform: uppercase; }
+  .auto-toggle { background: transparent; border: 1px solid #3a3; color: #3a3; font-family: 'Space Mono', monospace; font-size: 10px; padding: 4px 10px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
+  .auto-toggle.on { background: #3a3; color: #000; }
+  .auto-timer { color: #555; margin-left: auto; letter-spacing: 1px; }
+  .layout { display: grid; grid-template-columns: 1fr 340px; gap: 0; }
   .panel { background: var(--gray); border: 1px solid var(--mid); margin: 20px 24px; }
-  .panel-header { padding: 13px 20px; border-bottom: 1px solid var(--mid); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; }
-  .panel-header .count { color: var(--red); font-size: 12px; }
+  .panel-header { padding: 12px 18px; border-bottom: 1px solid var(--mid); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; align-items: center; }
+  .panel-header .count { color: var(--red); font-size: 11px; }
   .view-tabs { display: flex; border-bottom: 1px solid var(--mid); }
-  .view-tab { padding: 10px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-right: 1px solid var(--mid); background: transparent; color: #555; border-top:none;border-left:none;border-bottom:none; font-family: 'Space Mono', monospace; }
+  .view-tab { padding: 9px 18px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-right: 1px solid var(--mid); background: transparent; color: #555; border-top:none;border-left:none;border-bottom:none; font-family: 'Space Mono', monospace; transition: all 0.15s; }
   .view-tab.active { color: var(--white); background: var(--mid); }
-  .keyword-grid { padding: 18px; display: flex; flex-wrap: wrap; gap: 10px; min-height: 180px; align-content: flex-start; }
-  .kw-chip { display: flex; align-items: center; gap: 8px; background: var(--black); border: 1px solid var(--mid); padding: 8px 12px; position: relative; overflow: hidden; }
+  .keyword-grid { padding: 16px; display: flex; flex-wrap: wrap; gap: 8px; min-height: 160px; align-content: flex-start; }
+  .kw-chip { display: flex; align-items: center; gap: 7px; background: var(--black); border: 1px solid var(--mid); padding: 7px 11px; position: relative; overflow: hidden; cursor: pointer; transition: all 0.15s; }
+  .kw-chip:hover { border-color: var(--red); transform: translateY(-1px); }
+  .kw-chip.active-filter { border-color: var(--red) !important; background: rgba(255,49,49,0.1); }
   .kw-chip .bar { position: absolute; left:0;top:0;bottom:0; background: var(--red); opacity: 0.12; }
-  .kw-chip .word { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; position: relative; }
-  .kw-chip .freq { font-size: 10px; color: var(--red); position: relative; }
+  .kw-chip .word { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; position: relative; }
+  .kw-chip .freq { font-size: 9px; color: var(--red); position: relative; }
   .kw-chip.r1 { border-color: #ffd700; } .kw-chip.r1 .word { color: #ffd700; }
   .kw-chip.r2 { border-color: #c0c0c0; } .kw-chip.r2 .word { color: #c0c0c0; }
   .kw-chip.r3 { border-color: #cd7f32; } .kw-chip.r3 .word { color: #cd7f32; }
-  .bar-chart { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-  .bar-row { display: grid; grid-template-columns: 100px 1fr 40px; align-items: center; gap: 10px; }
-  .bar-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .bar-track { background: var(--black); height: 14px; border: 1px solid var(--mid); }
-  .bar-fill { height: 100%; background: var(--red); }
-  .bar-val { font-size: 11px; color: var(--red); }
-  .log-panel { padding: 14px 18px; border-top: 1px solid var(--mid); font-size: 11px; color: #444; line-height: 2; min-height: 70px; }
-  .log-entry.active { color: #888; } .log-entry.done { color: #3a3; } .log-entry.err { color: #c44; }
-  .item-entry { padding: 12px 18px; border-bottom: 1px solid var(--mid); }
+  .bar-chart { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: grid; grid-template-columns: 100px 1fr 36px; align-items: center; gap: 8px; }
+  .bar-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { background: var(--black); height: 13px; border: 1px solid var(--mid); }
+  .bar-fill { height: 100%; background: var(--red); transition: width 0.5s; }
+  .bar-val { font-size: 10px; color: var(--red); }
+  .log-panel { padding: 10px 16px; border-top: 1px solid var(--mid); font-size: 10px; color: #444; line-height: 1.9; min-height: 55px; }
+  .log-entry.active { color: #888; } .log-entry.done { color: #3a3; } .log-entry.err { color: #c44; } .log-entry.info { color: #55f; }
+  .filter-bar { padding: 8px 16px; border-bottom: 1px solid var(--mid); font-size: 9px; color: #555; display: flex; align-items: center; gap: 8px; }
+  .clear-filter { color: var(--red); cursor: pointer; text-decoration: underline; display: none; }
+  .item-entry { padding: 10px 16px; border-bottom: 1px solid var(--mid); transition: background 0.15s; }
+  .item-entry:hover { background: var(--mid); }
   .item-entry:last-child { border-bottom: none; }
-  .item-name { font-size: 12px; margin-bottom: 5px; line-height: 1.4; }
-  .item-meta { display: flex; gap: 12px; font-size: 10px; color: #555; }
-  .kw-badge { display: inline-block; font-size: 10px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 8px; margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
-  .empty { width:100%;padding:40px 20px;text-align:center;color:#333;font-size:12px;letter-spacing:2px;text-transform:uppercase;line-height:2; }
+  .item-link { text-decoration: none; color: inherit; display: block; }
+  .item-name { font-size: 11px; margin-bottom: 4px; line-height: 1.4; color: var(--white); }
+  .item-name:hover { color: var(--red); }
+  .item-meta { display: flex; gap: 10px; font-size: 9px; color: #555; align-items: center; }
+  .item-meta .fav { color: #c44; }
+  .kw-badge { display: inline-block; font-size: 9px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 6px; margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+  .rblx-link { font-size: 9px; color: #3a3; text-decoration: none; letter-spacing: 1px; margin-left: auto; }
+  .rblx-link:hover { text-decoration: underline; }
+  .empty { width:100%;padding:40px 20px;text-align:center;color:#333;font-size:11px;letter-spacing:2px;text-transform:uppercase;line-height:2; }
+  .hourly-badge { background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; letter-spacing: 1px; margin-left: 8px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <header>
   <div class="tag">LIVE SCANNER</div>
   <h1>RBLX <span>TREND</span> SCANNER</h1>
-  <div style="font-size:11px;color:#333;letter-spacing:2px;margin-top:4px;">2D CLOTHING KEYWORD ANALYZER</div>
+  <div style="font-size:10px;color:#333;letter-spacing:2px;margin-top:3px;">2D CLOTHING KEYWORD ANALYZER — BOT KEYWORD DETECTION</div>
 </header>
 <div class="proxy-bar">
   <div class="proxy-dot"></div>
-  <div class="proxy-label">Proxy Connected</div>
+  <div class="proxy-label">Proxy Live</div>
   <div class="proxy-url">rblx-proxy-wztg.onrender.com</div>
 </div>
 <div class="controls">
   <div class="control-row">
-    <div class="control-label">Sort</div>
+    <div class="control-label">Period</div>
     <div class="btn-group">
-      <button class="active" data-sort="2">Trending</button>
-      <button data-sort="3">Favorited</button>
-      <button data-sort="0">Relevance</button>
+      <button class="active" data-sort="2" data-label="Trending">Trending</button>
+      <button data-sort="3" data-label="Most Favorited">Favorited</button>
+      <button data-sort="1" data-label="Most Purchased">Purchased</button>
+      <button data-sort="0" data-label="Relevance">Relevance</button>
     </div>
   </div>
   <div class="control-row">
@@ -89,38 +108,137 @@
       <button class="cat-btn active" data-assettype="11">Shirts</button>
       <button class="cat-btn" data-assettype="12">Pants</button>
       <button class="cat-btn" data-assettype="2">T-Shirts</button>
-      <button class="cat-btn" data-assettype="">All</button>
+      <button class="cat-btn" data-assettype="">All Clothing</button>
     </div>
   </div>
   <button class="scan-btn" id="scanBtn"><span class="dot"></span>SCAN TRENDS</button>
 </div>
-<div class="panel">
-  <div class="panel-header"><span>Top Trending Keywords</span><span class="count" id="kwCount">-</span></div>
-  <div class="view-tabs">
-    <button class="view-tab active" data-view="chips">Cloud</button>
-    <button class="view-tab" data-view="bars">Chart</button>
+<div class="auto-bar">
+  <div class="auto-label">Auto-Scan</div>
+  <button class="auto-toggle" id="autoToggle">OFF</button>
+  <div class="btn-group" style="margin-left:8px;">
+    <button class="active" data-interval="3600000">Hourly</button>
+    <button data-interval="1800000">30 Min</button>
+    <button data-interval="900000">15 Min</button>
   </div>
-  <div id="keywordDisplay"><div class="keyword-grid"><div class="empty">Press SCAN TRENDS<br>to analyze live data</div></div></div>
-  <div class="log-panel" id="logPanel"><div class="log-entry">// ready</div></div>
+  <div class="auto-timer" id="autoTimer">Next scan: --:--</div>
 </div>
-<div class="panel">
-  <div class="panel-header"><span>Scanned Items</span><span class="count" id="itemCount">-</span></div>
-  <div id="itemList"><div class="empty">NO DATA YET</div></div>
+
+<div class="layout">
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        <span>Top Keywords <span class="hourly-badge" id="scanBadge" style="display:none">LIVE</span></span>
+        <span class="count" id="kwCount">-</span>
+      </div>
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="chips">Cloud</button>
+        <button class="view-tab" data-view="bars">Chart</button>
+      </div>
+      <div id="keywordDisplay"><div class="keyword-grid"><div class="empty">Press SCAN TRENDS<br>to analyze live clothing data</div></div></div>
+      <div class="log-panel" id="logPanel"><div class="log-entry">// ready — select options and scan</div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="panel" style="margin-left:0;">
+      <div class="panel-header">
+        <span>Items</span>
+        <span class="count" id="itemCount">-</span>
+      </div>
+      <div class="filter-bar">
+        <span id="filterLabel">Showing all items</span>
+        <span class="clear-filter" id="clearFilter" onclick="clearFilter()">clear filter</span>
+      </div>
+      <div id="itemList" style="max-height:600px;overflow-y:auto;"><div class="empty">NO DATA YET</div></div>
+    </div>
+  </div>
 </div>
+
 <script>
 var PROXY = "https://rblx-proxy-wztg.onrender.com";
-var SW = {"the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,"from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"be":1,"not":1,"no":1,"so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"cool":1,"nice":1,"cute":1,"best":1,"good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,"roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"ugc":1,"free":1,"sale":1,"ver":1,"type":1,"wear":1};
+
+// Extended stopwords — strips generic clothing bot filler
+var SW = {
+  "the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,
+  "from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"be":1,"not":1,"no":1,
+  "so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"cool":1,"nice":1,"cute":1,"best":1,
+  "good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,
+  "roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"ugc":1,"free":1,"sale":1,
+  "ver":1,"type":1,"wear":1,"clothes":1,"design":1,"look":1,"fit":1,"drip":1,"boys":1,"girls":1,
+  "men":1,"women":1,"man":1,"woman":1,"boy":1,"girl":1,"kid":1,"kids":1,"teen":1,"male":1,"female":1,
+  "red":1,"blue":1,"black":1,"white":1,"green":1,"pink":1,"yellow":1,"grey":1,"gray":1,"purple":1,
+  "one":1,"two":1,"three":1,"four":1,"five":1,"vol":1,"part":1,"edition":1,"limited":1,"special":1,
+  "super":1,"ultra":1,"mega":1,"pro":1,"plus":1,"max":1,"mini":1,"big":1,"small":1,"shirt2":1,
+  "2021":1,"2022":1,"2023":1,"2024":1,"2025":1,"2026":1
+};
+
+// Score keywords — favors nouns, aesthetics, brand names, longer specific words
+function scoreWord(word) {
+  var score = 0;
+  score += word.length * 2;
+  // Bonus for aesthetic/niche words
+  var aesthetics = {"aesthetic":10,"kawaii":10,"grunge":10,"cottagecore":10,"y2k":10,"streetwear":10,
+    "vintage":8,"retro":8,"gothic":8,"dark":6,"pastel":8,"fairy":8,"anime":8,"cyber":8,
+    "preppy":8,"baddie":8,"soft":6,"egirl":10,"eboy":10,"vsco":10,"coquette":10,"academia":10,
+    "butterfly":8,"floral":6,"plaid":6,"flannel":6,"denim":6,"lace":6,"corset":8,"hoodie":4,
+    "oversized":6,"cropped":6,"fitted":4,"baggy":6,"graphic":5,"band":5,"tie":4,"dye":5,
+    "mushroom":8,"frog":8,"cloud":6,"star":5,"moon":6,"sun":5,"heart":5,"skull":6,"rose":5,
+    "sakura":8,"dragon":8,"koi":8,"wave":5,"mountain":5,"forest":6,"ocean":6,"galaxy":6,
+    "rainbow":5,"ombre":6,"holographic":10,"iridescent":10,"metallic":6,"glitter":5,"neon":6};
+  if (aesthetics[word]) score += aesthetics[word];
+  // Penalty for very short words
+  if (word.length < 4) score -= 10;
+  return score;
+}
+
+function extractKeywords(name) {
+  var words = name.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(function(w) { return w.length > 2 && !SW[w] && isNaN(w); });
+
+  if (!words.length) return [];
+
+  // Score and sort
+  var scored = words.map(function(w) { return { word: w, score: scoreWord(w) }; });
+  scored.sort(function(a, b) { return b.score - a.score; });
+
+  // Return top 2 unique keywords per item
+  var seen = {};
+  var result = [];
+  for (var i = 0; i < scored.length && result.length < 2; i++) {
+    if (!seen[scored[i].word]) {
+      seen[scored[i].word] = true;
+      result.push(scored[i].word);
+    }
+  }
+  return result;
+}
+
 var currentSort = "2";
 var currentAssetType = "11";
 var currentView = "chips";
+var currentInterval = 3600000;
 var items = [];
 var freq = {};
 var scanning = false;
+var autoOn = false;
+var autoTimer = null;
+var nextScanTime = null;
+var activeFilter = null;
 
-document.querySelectorAll(".btn-group button").forEach(function(b) {
+document.querySelectorAll(".btn-group button[data-sort]").forEach(function(b) {
   b.addEventListener("click", function() {
-    document.querySelectorAll(".btn-group button").forEach(function(x){x.classList.remove("active");});
+    document.querySelectorAll(".btn-group button[data-sort]").forEach(function(x){x.classList.remove("active");});
     b.classList.add("active"); currentSort = b.dataset.sort;
+  });
+});
+document.querySelectorAll(".btn-group button[data-interval]").forEach(function(b) {
+  b.addEventListener("click", function() {
+    document.querySelectorAll(".btn-group button[data-interval]").forEach(function(x){x.classList.remove("active");});
+    b.classList.add("active"); currentInterval = parseInt(b.dataset.interval);
+    if (autoOn) startAuto();
   });
 });
 document.querySelectorAll(".cat-btn").forEach(function(b) {
@@ -136,6 +254,37 @@ document.querySelectorAll(".view-tab").forEach(function(t) {
   });
 });
 
+document.getElementById("autoToggle").addEventListener("click", function() {
+  autoOn = !autoOn;
+  this.textContent = autoOn ? "ON" : "OFF";
+  this.className = "auto-toggle" + (autoOn ? " on" : "");
+  if (autoOn) { startAuto(); } else { stopAuto(); }
+});
+
+function startAuto() {
+  stopAuto();
+  scan();
+  nextScanTime = Date.now() + currentInterval;
+  autoTimer = setInterval(function() {
+    var remaining = nextScanTime - Date.now();
+    if (remaining <= 0) {
+      scan();
+      nextScanTime = Date.now() + currentInterval;
+    }
+    var mins = Math.floor(remaining / 60000);
+    var secs = Math.floor((remaining % 60000) / 1000);
+    document.getElementById("autoTimer").textContent = "Next: " + mins + ":" + (secs < 10 ? "0" : "") + secs;
+  }, 1000);
+  document.getElementById("scanBadge").style.display = "inline";
+}
+
+function stopAuto() {
+  if (autoTimer) clearInterval(autoTimer);
+  autoTimer = null;
+  document.getElementById("autoTimer").textContent = "Next scan: --:--";
+  document.getElementById("scanBadge").style.display = "none";
+}
+
 function log(msg, type) {
   var p = document.getElementById("logPanel");
   p.querySelectorAll(".log-entry").forEach(function(e){e.classList.remove("active");});
@@ -143,14 +292,25 @@ function log(msg, type) {
   d.className = "log-entry " + (type||"active");
   d.textContent = "> " + msg;
   p.appendChild(d);
-  if (p.children.length > 6) p.removeChild(p.firstChild);
+  if (p.children.length > 7) p.removeChild(p.firstChild);
 }
 
-function kw(name) {
-  var words = name.toLowerCase().replace(/[^a-z\s]/g," ").split(/\s+/).filter(function(w){return w.length>2&&!SW[w];});
-  if (!words.length) return null;
-  words.sort(function(a,b){return b.length-a.length;});
-  return words[0];
+function setFilter(kw) {
+  activeFilter = kw;
+  document.getElementById("filterLabel").textContent = "Filtered: " + kw.toUpperCase();
+  document.getElementById("clearFilter").style.display = "inline";
+  renderItems();
+  document.querySelectorAll(".kw-chip").forEach(function(c) {
+    c.classList.toggle("active-filter", c.dataset.kw === kw);
+  });
+}
+
+function clearFilter() {
+  activeFilter = null;
+  document.getElementById("filterLabel").textContent = "Showing all items";
+  document.getElementById("clearFilter").style.display = "none";
+  renderItems();
+  document.querySelectorAll(".kw-chip").forEach(function(c) { c.classList.remove("active-filter"); });
 }
 
 async function scan() {
@@ -160,7 +320,7 @@ async function scan() {
   btn.disabled = true; btn.classList.add("scanning");
   items = []; freq = {};
   document.getElementById("logPanel").innerHTML = "";
-  log("Connecting...");
+  log("Connecting to Roblox catalog...");
 
   try {
     var params = "Category=3&SortType=" + currentSort + "&SortAggregation=0&Limit=28";
@@ -168,7 +328,7 @@ async function scan() {
     var r = await fetch(PROXY + "/catalog?" + params);
     var d = await r.json();
     var ids = (d.data||[]).filter(function(i){return i.itemType==="Asset";}).map(function(i){return i.id;});
-    log("Got " + ids.length + " item IDs...");
+    log("Got " + ids.length + " item IDs — fetching details...");
 
     if (ids.length) {
       var payload = JSON.stringify({items: ids.map(function(id){return {itemType:"Asset",id:id};})});
@@ -178,19 +338,34 @@ async function scan() {
         body: payload
       });
       var d2 = await r2.json();
-      var details = d2.data || d2.Data || [];
-      log("Details: " + details.length + " items");
+      var details = d2.data || [];
+      log("Processing " + details.length + " items...");
 
       details.forEach(function(item) {
-        var name = item.name || item.Name || "";
-        var k = kw(name);
-        if (!k || !name) return;
-        items.push({name:name, keyword:k, favorites:item.favoriteCount||0, price:item.price||0});
-        freq[k] = (freq[k]||0) + 1;
+        var name = item.name || "";
+        if (!name) return;
+        var keywords = extractKeywords(name);
+        if (!keywords.length) return;
+        var primary = keywords[0];
+        items.push({
+          name: name,
+          keyword: primary,
+          keywords: keywords,
+          favorites: item.favoriteCount || 0,
+          price: item.price || 0,
+          id: item.id,
+          assetType: item.assetType,
+          url: "https://www.roblox.com/catalog/" + item.id
+        });
+        keywords.forEach(function(kw) {
+          freq[kw] = (freq[kw]||0) + 1;
+        });
       });
-      log("Done! " + items.length + " items, " + Object.keys(freq).length + " keywords.", "done");
+
+      var now = new Date();
+      log("Scanned at " + now.toLocaleTimeString() + " — " + items.length + " items, " + Object.keys(freq).length + " keywords.", "done");
     } else {
-      log("No IDs returned.", "err");
+      log("No IDs returned from catalog.", "err");
     }
   } catch(e) {
     log("Error: " + e.message, "err");
@@ -203,29 +378,42 @@ async function scan() {
 }
 
 function renderKw() {
-  var sorted = Object.entries(freq).sort(function(a,b){return b[1]-a[1];}).slice(0,20);
+  var sorted = Object.entries(freq).sort(function(a,b){return b[1]-a[1];}).slice(0,24);
   var max = sorted[0] ? sorted[0][1] : 1;
   var el = document.getElementById("keywordDisplay");
-  if (!sorted.length) { el.innerHTML = "<div class=\"keyword-grid\"><div class=\"empty\">Press SCAN TRENDS<br>to analyze live data</div></div>"; return; }
+  if (!sorted.length) {
+    el.innerHTML = "<div class=\"keyword-grid\"><div class=\"empty\">Press SCAN TRENDS<br>to analyze live data</div></div>";
+    return;
+  }
   if (currentView === "chips") {
     el.innerHTML = "<div class=\"keyword-grid\">" + sorted.map(function(e,i){
       var w=e[0],c=e[1],pct=Math.round(c/max*100);
       var rc=i===0?"r1":i===1?"r2":i===2?"r3":"";
-      return "<div class=\"kw-chip "+rc+"\"><span class=\"bar\" style=\"width:"+pct+"%\"></span><span class=\"word\">"+w+"</span><span class=\"freq\">x"+c+"</span></div>";
+      return "<div class=\"kw-chip "+rc+"\" data-kw=\""+w+"\" onclick=\"setFilter('"+w+"')\"><span class=\"bar\" style=\"width:"+pct+"%\"></span><span class=\"word\">"+w+"</span><span class=\"freq\">x"+c+"</span></div>";
     }).join("") + "</div>";
   } else {
-    el.innerHTML = "<div class=\"bar-chart\">" + sorted.slice(0,12).map(function(e){
+    el.innerHTML = "<div class=\"bar-chart\">" + sorted.slice(0,14).map(function(e){
       var w=e[0],c=e[1],pct=(c/max*100).toFixed(1);
-      return "<div class=\"bar-row\"><div class=\"bar-label\">"+w+"</div><div class=\"bar-track\"><div class=\"bar-fill\" style=\"width:"+pct+"%\"></div></div><div class=\"bar-val\">x"+c+"</div></div>";
+      return "<div class=\"bar-row\" onclick=\"setFilter('"+w+"')\" style=\"cursor:pointer\"><div class=\"bar-label\">"+w+"</div><div class=\"bar-track\"><div class=\"bar-fill\" style=\"width:"+pct+"%\"></div></div><div class=\"bar-val\">x"+c+"</div></div>";
     }).join("") + "</div>";
   }
 }
 
 function renderItems() {
   var el = document.getElementById("itemList");
-  if (!items.length) { el.innerHTML = "<div class=\"empty\">NO DATA YET</div>"; return; }
-  el.innerHTML = items.slice(0,40).map(function(item){
-    return "<div class=\"item-entry\"><div class=\"item-name\">"+item.name+"</div><div class=\"item-meta\"><span>fav "+item.favorites.toLocaleString()+"</span><span>"+(item.price?item.price+"R$":"FREE")+"</span></div><span class=\"kw-badge\">"+item.keyword+"</span></div>";
+  var list = activeFilter ? items.filter(function(i){ return i.keywords.indexOf(activeFilter) >= 0; }) : items;
+  if (!list.length) { el.innerHTML = "<div class=\"empty\">" + (activeFilter ? "No items for: "+activeFilter.toUpperCase() : "NO DATA YET") + "</div>"; return; }
+  el.innerHTML = list.slice(0,60).map(function(item){
+    return "<div class=\"item-entry\"><a class=\"item-link\" href=\""+item.url+"\" target=\"_blank\">" +
+      "<div class=\"item-name\">"+item.name+"</div>" +
+      "<div class=\"item-meta\">" +
+        "<span class=\"fav\">♥ "+item.favorites.toLocaleString()+"</span>" +
+        "<span>"+(item.price?item.price+"R$":"FREE")+"</span>" +
+        "<a class=\"rblx-link\" href=\""+item.url+"\" target=\"_blank\">VIEW ON ROBLOX ↗</a>" +
+      "</div>" +
+      "<span class=\"kw-badge\">"+item.keyword+"</span>" +
+      (item.keywords[1] ? "<span class=\"kw-badge\" style=\"margin-left:4px;opacity:0.6;\">"+item.keywords[1]+"</span>" : "") +
+    "</a></div>";
   }).join("");
 }
 
