@@ -360,6 +360,9 @@ async function scan() {
       var details = d2.data || [];
 
       details.forEach(function(item) {
+        // Only allow classic 2D clothing asset types
+        var allowed = {2:1, 12:1, 13:1};
+        if (!allowed[item.assetType]) return;
         var name = item.name || "";
         if (!name) return;
         var keywords = extractKeywords(name);
