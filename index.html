@@ -33,13 +33,14 @@
   .dot { width: 9px; height: 9px; background: white; border-radius: 50%; }
   .scan-btn.scanning .dot { animation: pulse 0.6s ease-in-out infinite alternate; }
   @keyframes pulse { from{transform:scale(1)}to{transform:scale(1.8);opacity:0.3} }
-  .auto-bar { background: #0d1a0d; border-bottom: 1px solid #1a3a1a; padding: 8px 24px; display: flex; align-items: center; gap: 12px; font-size: 10px; }
+  .auto-bar { background: #0d1a0d; border-bottom: 1px solid #1a3a1a; padding: 8px 24px; display: flex; align-items: center; gap: 12px; font-size: 10px; flex-wrap: wrap; }
   .auto-label { color: #3a3; letter-spacing: 2px; text-transform: uppercase; }
   .auto-toggle { background: transparent; border: 1px solid #3a3; color: #3a3; font-family: 'Space Mono', monospace; font-size: 10px; padding: 4px 10px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
   .auto-toggle.on { background: #3a3; color: #000; }
   .auto-timer { color: #555; margin-left: auto; letter-spacing: 1px; }
-  .layout { display: grid; grid-template-columns: 1fr 340px; gap: 0; }
+  .layout { display: grid; grid-template-columns: 1fr 360px; }
   .panel { background: var(--gray); border: 1px solid var(--mid); margin: 20px 24px; }
+  .panel-right { background: var(--gray); border: 1px solid var(--mid); margin: 20px 24px 20px 0; }
   .panel-header { padding: 12px 18px; border-bottom: 1px solid var(--mid); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #666; display: flex; justify-content: space-between; align-items: center; }
   .panel-header .count { color: var(--red); font-size: 11px; }
   .view-tabs { display: flex; border-bottom: 1px solid var(--mid); }
@@ -56,59 +57,68 @@
   .kw-chip.r2 { border-color: #c0c0c0; } .kw-chip.r2 .word { color: #c0c0c0; }
   .kw-chip.r3 { border-color: #cd7f32; } .kw-chip.r3 .word { color: #cd7f32; }
   .bar-chart { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .bar-row { display: grid; grid-template-columns: 100px 1fr 36px; align-items: center; gap: 8px; }
+  .bar-row { display: grid; grid-template-columns: 100px 1fr 36px; align-items: center; gap: 8px; cursor: pointer; }
   .bar-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bar-track { background: var(--black); height: 13px; border: 1px solid var(--mid); }
   .bar-fill { height: 100%; background: var(--red); transition: width 0.5s; }
   .bar-val { font-size: 10px; color: var(--red); }
   .log-panel { padding: 10px 16px; border-top: 1px solid var(--mid); font-size: 10px; color: #444; line-height: 1.9; min-height: 55px; }
-  .log-entry.active { color: #888; } .log-entry.done { color: #3a3; } .log-entry.err { color: #c44; } .log-entry.info { color: #55f; }
+  .log-entry.active { color: #888; } .log-entry.done { color: #3a3; } .log-entry.err { color: #c44; }
   .filter-bar { padding: 8px 16px; border-bottom: 1px solid var(--mid); font-size: 9px; color: #555; display: flex; align-items: center; gap: 8px; }
-  .clear-filter { color: var(--red); cursor: pointer; text-decoration: underline; display: none; }
+  .clear-filter { color: var(--red); cursor: pointer; text-decoration: underline; display: none; font-size: 9px; }
   .item-entry { padding: 10px 16px; border-bottom: 1px solid var(--mid); transition: background 0.15s; }
   .item-entry:hover { background: var(--mid); }
   .item-entry:last-child { border-bottom: none; }
-  .item-link { text-decoration: none; color: inherit; display: block; }
-  .item-name { font-size: 11px; margin-bottom: 4px; line-height: 1.4; color: var(--white); }
-  .item-name:hover { color: var(--red); }
-  .item-meta { display: flex; gap: 10px; font-size: 9px; color: #555; align-items: center; }
-  .item-meta .fav { color: #c44; }
+  .item-name { font-size: 11px; margin-bottom: 4px; line-height: 1.4; color: var(--white); text-decoration: none; display: block; }
+  .item-meta { display: flex; gap: 10px; font-size: 9px; color: #555; align-items: center; flex-wrap: wrap; }
+  .fav { color: #c44; }
   .kw-badge { display: inline-block; font-size: 9px; background: rgba(255,49,49,0.12); color: var(--red); border: 1px solid rgba(255,49,49,0.3); padding: 2px 6px; margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
-  .rblx-link { font-size: 9px; color: #3a3; text-decoration: none; letter-spacing: 1px; margin-left: auto; }
+  .kw-badge2 { opacity: 0.5; margin-left: 4px; }
+  .rblx-link { font-size: 9px; color: #3a3; text-decoration: none; letter-spacing: 1px; margin-left: auto; white-space: nowrap; }
   .rblx-link:hover { text-decoration: underline; }
+  .creator { color: #666; font-size: 9px; }
   .empty { width:100%;padding:40px 20px;text-align:center;color:#333;font-size:11px;letter-spacing:2px;text-transform:uppercase;line-height:2; }
-  .hourly-badge { background: #ffd700; color: #000; font-size: 9px; padding: 2px 6px; letter-spacing: 1px; margin-left: 8px; }
-  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .info-tip { padding: 8px 24px; background: rgba(255,215,0,0.05); border-bottom: 1px solid rgba(255,215,0,0.1); font-size: 9px; color: #665; letter-spacing: 1px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .panel-right { margin-left: 24px; } }
 </style>
 </head>
 <body>
 <header>
   <div class="tag">LIVE SCANNER</div>
   <h1>RBLX <span>TREND</span> SCANNER</h1>
-  <div style="font-size:10px;color:#333;letter-spacing:2px;margin-top:3px;">2D CLOTHING KEYWORD ANALYZER — BOT KEYWORD DETECTION</div>
+  <div style="font-size:10px;color:#333;letter-spacing:2px;margin-top:3px;">USER CLOTHING KEYWORD ANALYZER — BOT KEYWORD DETECTION</div>
 </header>
 <div class="proxy-bar">
   <div class="proxy-dot"></div>
   <div class="proxy-label">Proxy Live</div>
   <div class="proxy-url">rblx-proxy-wztg.onrender.com</div>
 </div>
+<div class="info-tip">💡 Use "Newest" to find fresh user-uploaded clothing. Click any keyword to filter items. Each item links directly to Roblox.</div>
 <div class="controls">
   <div class="control-row">
-    <div class="control-label">Period</div>
+    <div class="control-label">Sort By</div>
     <div class="btn-group">
-      <button class="active" data-sort="2" data-label="Trending">Trending</button>
-      <button data-sort="3" data-label="Most Favorited">Favorited</button>
-      <button data-sort="1" data-label="Most Purchased">Purchased</button>
-      <button data-sort="0" data-label="Relevance">Relevance</button>
+      <button class="active" data-sort="12">Newest</button>
+      <button data-sort="2">Trending</button>
+      <button data-sort="3">Favorited</button>
+      <button data-sort="1">Top Selling</button>
     </div>
   </div>
   <div class="control-row">
     <div class="control-label">Category</div>
     <div class="cat-group">
       <button class="cat-btn active" data-assettype="11">Shirts</button>
-      <button class="cat-btn" data-assettype="12">Pants</button>
-      <button class="cat-btn" data-assettype="2">T-Shirts</button>
-      <button class="cat-btn" data-assettype="">All Clothing</button>
+      <button class="cat-btn" data-assettype="12">Classic Pants</button>
+      <button class="cat-btn" data-assettype="2">Classic T-Shirts</button>
+      <button class="cat-btn" data-assettype="11">All 2D Shirts</button>
+    </div>
+  </div>
+  <div class="control-row">
+    <div class="control-label">Pages</div>
+    <div class="btn-group">
+      <button class="active" data-pages="1">1 Page</button>
+      <button data-pages="2">2 Pages</button>
+      <button data-pages="3">3 Pages</button>
     </div>
   </div>
   <button class="scan-btn" id="scanBtn"><span class="dot"></span>SCAN TRENDS</button>
@@ -128,29 +138,29 @@
   <div>
     <div class="panel">
       <div class="panel-header">
-        <span>Top Keywords <span class="hourly-badge" id="scanBadge" style="display:none">LIVE</span></span>
+        <span>Top Keywords</span>
         <span class="count" id="kwCount">-</span>
       </div>
       <div class="view-tabs">
         <button class="view-tab active" data-view="chips">Cloud</button>
         <button class="view-tab" data-view="bars">Chart</button>
       </div>
-      <div id="keywordDisplay"><div class="keyword-grid"><div class="empty">Press SCAN TRENDS<br>to analyze live clothing data</div></div></div>
-      <div class="log-panel" id="logPanel"><div class="log-entry">// ready — select options and scan</div></div>
+      <div id="keywordDisplay"><div class="keyword-grid"><div class="empty">Press SCAN TRENDS<br>to analyze live user clothing</div></div></div>
+      <div class="log-panel" id="logPanel"><div class="log-entry">// ready</div></div>
     </div>
   </div>
 
   <div>
-    <div class="panel" style="margin-left:0;">
+    <div class="panel-right">
       <div class="panel-header">
         <span>Items</span>
         <span class="count" id="itemCount">-</span>
       </div>
       <div class="filter-bar">
-        <span id="filterLabel">Showing all items</span>
-        <span class="clear-filter" id="clearFilter" onclick="clearFilter()">clear filter</span>
+        <span id="filterLabel">All items</span>
+        <span class="clear-filter" id="clearFilter" onclick="clearFilter()">✕ clear</span>
       </div>
-      <div id="itemList" style="max-height:600px;overflow-y:auto;"><div class="empty">NO DATA YET</div></div>
+      <div id="itemList" style="max-height:620px;overflow-y:auto;"><div class="empty">NO DATA YET</div></div>
     </div>
   </div>
 </div>
@@ -158,37 +168,37 @@
 <script>
 var PROXY = "https://rblx-proxy-wztg.onrender.com";
 
-// Extended stopwords — strips generic clothing bot filler
 var SW = {
   "the":1,"a":1,"an":1,"and":1,"or":1,"of":1,"in":1,"on":1,"at":1,"to":1,"for":1,"with":1,"by":1,
   "from":1,"is":1,"it":1,"its":1,"this":1,"that":1,"my":1,"your":1,"our":1,"be":1,"not":1,"no":1,
   "so":1,"but":1,"if":1,"as":1,"up":1,"out":1,"new":1,"old":1,"cool":1,"nice":1,"cute":1,"best":1,
   "good":1,"great":1,"shirt":1,"tshirt":1,"pants":1,"top":1,"bottom":1,"clothing":1,"outfit":1,
   "roblox":1,"rblx":1,"classic":1,"style":1,"pack":1,"set":1,"item":1,"ugc":1,"free":1,"sale":1,
-  "ver":1,"type":1,"wear":1,"clothes":1,"design":1,"look":1,"fit":1,"drip":1,"boys":1,"girls":1,
+  "ver":1,"type":1,"wear":1,"clothes":1,"design":1,"look":1,"fit":1,"boys":1,"girls":1,
   "men":1,"women":1,"man":1,"woman":1,"boy":1,"girl":1,"kid":1,"kids":1,"teen":1,"male":1,"female":1,
-  "red":1,"blue":1,"black":1,"white":1,"green":1,"pink":1,"yellow":1,"grey":1,"gray":1,"purple":1,
-  "one":1,"two":1,"three":1,"four":1,"five":1,"vol":1,"part":1,"edition":1,"limited":1,"special":1,
-  "super":1,"ultra":1,"mega":1,"pro":1,"plus":1,"max":1,"mini":1,"big":1,"small":1,"shirt2":1,
-  "2021":1,"2022":1,"2023":1,"2024":1,"2025":1,"2026":1
+  "one":1,"two":1,"three":1,"vol":1,"part":1,"edition":1,"limited":1,"special":1,"super":1,
+  "ultra":1,"mega":1,"pro":1,"plus":1,"max":1,"mini":1,"big":1,"small":1,
+  "2021":1,"2022":1,"2023":1,"2024":1,"2025":1,"2026":1,"shirt2":1,"pants2":1
 };
 
-// Score keywords — favors nouns, aesthetics, brand names, longer specific words
+var AESTHETICS = {
+  "aesthetic":10,"kawaii":10,"grunge":10,"cottagecore":10,"y2k":10,"streetwear":10,
+  "vintage":9,"retro":9,"gothic":9,"pastel":9,"fairy":9,"anime":9,"cyber":9,
+  "preppy":9,"baddie":9,"egirl":10,"eboy":10,"vsco":10,"coquette":10,"academia":10,
+  "dark":7,"soft":7,"alt":8,"indie":8,"boho":8,"emo":8,"punk":8,"skater":8,
+  "butterfly":8,"floral":7,"plaid":7,"flannel":7,"denim":7,"lace":7,"corset":8,
+  "hoodie":5,"oversized":7,"cropped":7,"graphic":6,"tie":5,"dye":6,"knit":6,
+  "mushroom":9,"frog":9,"cloud":7,"star":6,"moon":7,"skull":7,"rose":6,
+  "sakura":9,"dragon":9,"koi":9,"galaxy":7,"rainbow":6,"neon":7,"holographic":10,
+  "iridescent":10,"metallic":7,"glitter":6,"flare":7,"cargo":7,"corduroy":8,
+  "velvet":8,"satin":8,"leather":7,"fur":6,"sheer":7,"mesh":7,"ribbed":7,
+  "striped":6,"checkered":7,"gingham":8,"tartan":8,"argyle":9,"houndstooth":10
+};
+
 function scoreWord(word) {
-  var score = 0;
-  score += word.length * 2;
-  // Bonus for aesthetic/niche words
-  var aesthetics = {"aesthetic":10,"kawaii":10,"grunge":10,"cottagecore":10,"y2k":10,"streetwear":10,
-    "vintage":8,"retro":8,"gothic":8,"dark":6,"pastel":8,"fairy":8,"anime":8,"cyber":8,
-    "preppy":8,"baddie":8,"soft":6,"egirl":10,"eboy":10,"vsco":10,"coquette":10,"academia":10,
-    "butterfly":8,"floral":6,"plaid":6,"flannel":6,"denim":6,"lace":6,"corset":8,"hoodie":4,
-    "oversized":6,"cropped":6,"fitted":4,"baggy":6,"graphic":5,"band":5,"tie":4,"dye":5,
-    "mushroom":8,"frog":8,"cloud":6,"star":5,"moon":6,"sun":5,"heart":5,"skull":6,"rose":5,
-    "sakura":8,"dragon":8,"koi":8,"wave":5,"mountain":5,"forest":6,"ocean":6,"galaxy":6,
-    "rainbow":5,"ombre":6,"holographic":10,"iridescent":10,"metallic":6,"glitter":5,"neon":6};
-  if (aesthetics[word]) score += aesthetics[word];
-  // Penalty for very short words
-  if (word.length < 4) score -= 10;
+  if (AESTHETICS[word]) return 100 + AESTHETICS[word];
+  var score = word.length * 2;
+  if (word.length < 4) score -= 20;
   return score;
 }
 
@@ -197,14 +207,9 @@ function extractKeywords(name) {
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter(function(w) { return w.length > 2 && !SW[w] && isNaN(w); });
-
   if (!words.length) return [];
-
-  // Score and sort
   var scored = words.map(function(w) { return { word: w, score: scoreWord(w) }; });
   scored.sort(function(a, b) { return b.score - a.score; });
-
-  // Return top 2 unique keywords per item
   var seen = {};
   var result = [];
   for (var i = 0; i < scored.length && result.length < 2; i++) {
@@ -216,15 +221,16 @@ function extractKeywords(name) {
   return result;
 }
 
-var currentSort = "2";
+var currentSort = "12";
 var currentAssetType = "11";
 var currentView = "chips";
 var currentInterval = 3600000;
+var currentPages = 1;
 var items = [];
 var freq = {};
 var scanning = false;
 var autoOn = false;
-var autoTimer = null;
+var autoTimerInterval = null;
 var nextScanTime = null;
 var activeFilter = null;
 
@@ -232,6 +238,12 @@ document.querySelectorAll(".btn-group button[data-sort]").forEach(function(b) {
   b.addEventListener("click", function() {
     document.querySelectorAll(".btn-group button[data-sort]").forEach(function(x){x.classList.remove("active");});
     b.classList.add("active"); currentSort = b.dataset.sort;
+  });
+});
+document.querySelectorAll(".btn-group button[data-pages]").forEach(function(b) {
+  b.addEventListener("click", function() {
+    document.querySelectorAll(".btn-group button[data-pages]").forEach(function(x){x.classList.remove("active");});
+    b.classList.add("active"); currentPages = parseInt(b.dataset.pages);
   });
 });
 document.querySelectorAll(".btn-group button[data-interval]").forEach(function(b) {
@@ -258,31 +270,24 @@ document.getElementById("autoToggle").addEventListener("click", function() {
   autoOn = !autoOn;
   this.textContent = autoOn ? "ON" : "OFF";
   this.className = "auto-toggle" + (autoOn ? " on" : "");
-  if (autoOn) { startAuto(); } else { stopAuto(); }
+  if (autoOn) startAuto(); else stopAuto();
 });
 
 function startAuto() {
   stopAuto();
   scan();
   nextScanTime = Date.now() + currentInterval;
-  autoTimer = setInterval(function() {
-    var remaining = nextScanTime - Date.now();
-    if (remaining <= 0) {
-      scan();
-      nextScanTime = Date.now() + currentInterval;
-    }
-    var mins = Math.floor(remaining / 60000);
-    var secs = Math.floor((remaining % 60000) / 1000);
-    document.getElementById("autoTimer").textContent = "Next: " + mins + ":" + (secs < 10 ? "0" : "") + secs;
+  autoTimerInterval = setInterval(function() {
+    var rem = nextScanTime - Date.now();
+    if (rem <= 0) { scan(); nextScanTime = Date.now() + currentInterval; }
+    var m = Math.floor(rem/60000), s = Math.floor((rem%60000)/1000);
+    document.getElementById("autoTimer").textContent = "Next: " + m + ":" + (s<10?"0":"") + s;
   }, 1000);
-  document.getElementById("scanBadge").style.display = "inline";
 }
 
 function stopAuto() {
-  if (autoTimer) clearInterval(autoTimer);
-  autoTimer = null;
+  if (autoTimerInterval) clearInterval(autoTimerInterval);
   document.getElementById("autoTimer").textContent = "Next scan: --:--";
-  document.getElementById("scanBadge").style.display = "none";
 }
 
 function log(msg, type) {
@@ -297,7 +302,7 @@ function log(msg, type) {
 
 function setFilter(kw) {
   activeFilter = kw;
-  document.getElementById("filterLabel").textContent = "Filtered: " + kw.toUpperCase();
+  document.getElementById("filterLabel").textContent = "Keyword: " + kw.toUpperCase();
   document.getElementById("clearFilter").style.display = "inline";
   renderItems();
   document.querySelectorAll(".kw-chip").forEach(function(c) {
@@ -307,10 +312,18 @@ function setFilter(kw) {
 
 function clearFilter() {
   activeFilter = null;
-  document.getElementById("filterLabel").textContent = "Showing all items";
+  document.getElementById("filterLabel").textContent = "All items";
   document.getElementById("clearFilter").style.display = "none";
   renderItems();
-  document.querySelectorAll(".kw-chip").forEach(function(c) { c.classList.remove("active-filter"); });
+  document.querySelectorAll(".kw-chip").forEach(function(c){c.classList.remove("active-filter");});
+}
+
+async function fetchPage(cursor) {
+  var params = "SortType=" + currentSort + "&SortAggregation=0&Limit=28";
+  if (currentAssetType) params += "&AssetTypeId=" + currentAssetType;
+  if (cursor) params += "&Cursor=" + cursor;
+  var r = await fetch(PROXY + "/catalog?" + params);
+  return await r.json();
 }
 
 async function scan() {
@@ -320,18 +333,24 @@ async function scan() {
   btn.disabled = true; btn.classList.add("scanning");
   items = []; freq = {};
   document.getElementById("logPanel").innerHTML = "";
-  log("Connecting to Roblox catalog...");
+  log("Scanning user clothing...");
 
   try {
-    var params = "Category=3&SortType=" + currentSort + "&SortAggregation=0&Limit=28";
-    if (currentAssetType) params += "&AssetTypeId=" + currentAssetType;
-    var r = await fetch(PROXY + "/catalog?" + params);
-    var d = await r.json();
-    var ids = (d.data||[]).filter(function(i){return i.itemType==="Asset";}).map(function(i){return i.id;});
-    log("Got " + ids.length + " item IDs — fetching details...");
+    var allIds = [];
+    var cursor = "";
+    for (var p = 0; p < currentPages; p++) {
+      var d = await fetchPage(cursor);
+      var pageIds = (d.data||[]).filter(function(i){return i.itemType==="Asset";}).map(function(i){return i.id;});
+      allIds = allIds.concat(pageIds);
+      cursor = d.nextPageCursor || "";
+      log("Page " + (p+1) + ": " + pageIds.length + " items");
+      if (!cursor) break;
+    }
 
-    if (ids.length) {
-      var payload = JSON.stringify({items: ids.map(function(id){return {itemType:"Asset",id:id};})});
+    log("Fetching details for " + allIds.length + " items...");
+
+    if (allIds.length) {
+      var payload = JSON.stringify({items: allIds.map(function(id){return {itemType:"Asset",id:id};})});
       var r2 = await fetch(PROXY + "/details", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
@@ -339,22 +358,20 @@ async function scan() {
       });
       var d2 = await r2.json();
       var details = d2.data || [];
-      log("Processing " + details.length + " items...");
 
       details.forEach(function(item) {
         var name = item.name || "";
         if (!name) return;
         var keywords = extractKeywords(name);
         if (!keywords.length) return;
-        var primary = keywords[0];
         items.push({
           name: name,
-          keyword: primary,
+          keyword: keywords[0],
           keywords: keywords,
           favorites: item.favoriteCount || 0,
           price: item.price || 0,
           id: item.id,
-          assetType: item.assetType,
+          creator: item.creatorName || "",
           url: "https://www.roblox.com/catalog/" + item.id
         });
         keywords.forEach(function(kw) {
@@ -363,9 +380,7 @@ async function scan() {
       });
 
       var now = new Date();
-      log("Scanned at " + now.toLocaleTimeString() + " — " + items.length + " items, " + Object.keys(freq).length + " keywords.", "done");
-    } else {
-      log("No IDs returned from catalog.", "err");
+      log(items.length + " items scanned at " + now.toLocaleTimeString(), "done");
     }
   } catch(e) {
     log("Error: " + e.message, "err");
@@ -381,10 +396,7 @@ function renderKw() {
   var sorted = Object.entries(freq).sort(function(a,b){return b[1]-a[1];}).slice(0,24);
   var max = sorted[0] ? sorted[0][1] : 1;
   var el = document.getElementById("keywordDisplay");
-  if (!sorted.length) {
-    el.innerHTML = "<div class=\"keyword-grid\"><div class=\"empty\">Press SCAN TRENDS<br>to analyze live data</div></div>";
-    return;
-  }
+  if (!sorted.length) { el.innerHTML = "<div class=\"keyword-grid\"><div class=\"empty\">Press SCAN TRENDS<br>to analyze live user clothing</div></div>"; return; }
   if (currentView === "chips") {
     el.innerHTML = "<div class=\"keyword-grid\">" + sorted.map(function(e,i){
       var w=e[0],c=e[1],pct=Math.round(c/max*100);
@@ -394,26 +406,27 @@ function renderKw() {
   } else {
     el.innerHTML = "<div class=\"bar-chart\">" + sorted.slice(0,14).map(function(e){
       var w=e[0],c=e[1],pct=(c/max*100).toFixed(1);
-      return "<div class=\"bar-row\" onclick=\"setFilter('"+w+"')\" style=\"cursor:pointer\"><div class=\"bar-label\">"+w+"</div><div class=\"bar-track\"><div class=\"bar-fill\" style=\"width:"+pct+"%\"></div></div><div class=\"bar-val\">x"+c+"</div></div>";
+      return "<div class=\"bar-row\" onclick=\"setFilter('"+w+"')\"><div class=\"bar-label\">"+w+"</div><div class=\"bar-track\"><div class=\"bar-fill\" style=\"width:"+pct+"%\"></div></div><div class=\"bar-val\">x"+c+"</div></div>";
     }).join("") + "</div>";
   }
 }
 
 function renderItems() {
   var el = document.getElementById("itemList");
-  var list = activeFilter ? items.filter(function(i){ return i.keywords.indexOf(activeFilter) >= 0; }) : items;
-  if (!list.length) { el.innerHTML = "<div class=\"empty\">" + (activeFilter ? "No items for: "+activeFilter.toUpperCase() : "NO DATA YET") + "</div>"; return; }
-  el.innerHTML = list.slice(0,60).map(function(item){
-    return "<div class=\"item-entry\"><a class=\"item-link\" href=\""+item.url+"\" target=\"_blank\">" +
-      "<div class=\"item-name\">"+item.name+"</div>" +
+  var list = activeFilter ? items.filter(function(i){return i.keywords.indexOf(activeFilter)>=0;}) : items;
+  if (!list.length) { el.innerHTML = "<div class=\"empty\">" + (activeFilter?"No items for: "+activeFilter.toUpperCase():"NO DATA YET") + "</div>"; return; }
+  el.innerHTML = list.slice(0,80).map(function(item){
+    return "<div class=\"item-entry\">" +
+      "<a class=\"item-name\" href=\""+item.url+"\" target=\"_blank\">"+item.name+"</a>" +
       "<div class=\"item-meta\">" +
         "<span class=\"fav\">♥ "+item.favorites.toLocaleString()+"</span>" +
         "<span>"+(item.price?item.price+"R$":"FREE")+"</span>" +
-        "<a class=\"rblx-link\" href=\""+item.url+"\" target=\"_blank\">VIEW ON ROBLOX ↗</a>" +
+        (item.creator?"<span class=\"creator\">by "+item.creator+"</span>":"") +
+        "<a class=\"rblx-link\" href=\""+item.url+"\" target=\"_blank\">VIEW ↗</a>" +
       "</div>" +
       "<span class=\"kw-badge\">"+item.keyword+"</span>" +
-      (item.keywords[1] ? "<span class=\"kw-badge\" style=\"margin-left:4px;opacity:0.6;\">"+item.keywords[1]+"</span>" : "") +
-    "</a></div>";
+      (item.keywords[1]?"<span class=\"kw-badge kw-badge2\">"+item.keywords[1]+"</span>":"") +
+    "</div>";
   }).join("");
 }
 
